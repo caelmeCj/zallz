@@ -12,7 +12,7 @@ export class ZfmComponent implements OnInit {
   constructor(private zfmService:ZfmService) { }
 
   ngOnInit() {
-    console.log(this.zfmService.$fams);
+    // console.log(this.zfmService.$fams);
   } 
 
   
