@@ -1,6 +1,6 @@
 import {Place} from './place';
-
-export class Fam {
+import {Base} from './base';
+export class Fam extends Base{
     private num:number;
     private fam:String;
     private summary:String;
@@ -9,19 +9,13 @@ export class Fam {
     private place:Place;
     private timeLong:String;
 
-    constructor(field){
-        this.num=field.num;
-        this.fam=field.fam;
-        this.summary=field.summary;
-        this.event=field.event;
-        this.date=field.date;
-        this.place=field.place;
-        this.timeLong=field.timeLong;
-    }
+    // constructor(){}
 
+
+	constructor() {
+        super();
+	}
     
-
-
 	public get $place(): Place {
 		return this.place;
 	}

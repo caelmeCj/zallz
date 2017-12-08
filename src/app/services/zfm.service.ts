@@ -11,21 +11,22 @@ import {
 @Injectable()
 export class ZfmService {
 
-  private fams: Fam[];
-  private place: Place[];
+  private fams: Array<Fam>;
+  private places: Array<Place>;
 
   constructor() {
-
+    this.fams=new Array<Fam>();
+    this.places=new Array<Place>();
+    this.fillTempData();
+    
   }
 
   public fillTempData(){
       for(var i=0;i<10;i++){
-          let fam=new Fam({
-            num:1,
-            fam:'Lorem ipsum dolor sit amet enim facilisis efficitur ac, aliquam gravida porttitor class taciti sociosqu habitasse. Id vehicula sociosqu lacinia, etiam auctor porta. Hac orci, sit in primis. Augue enim, mauris, commodo efficitur sit cras in, ac. Feugiat venenatis habitasse amet interdum, vitae nunc, facilisis adipiscing. Pulvinar mauris, ligula, ut auctor, vel odio, dolor, vestibulum, purus congue. Orci nostra, sem suscipit quam volutpat. Pellentesque class phasellus interdum integer gravida ante, risus sagittis, per. Et, metus laoreet sodales tempor, non, fringilla interdum, vulputate lacus ex, quam. Sagittis, taciti hendrerit luctus, feugiat, per nullam hac mauris, iaculis porta, adipiscing lobortis enim auctor, justo malesuada. Sed, mollis aliquet id, tortor nisi, consequat facilisis et, ullamcorper ante rhoncus dui lacus mattis, viverra quis nulla volutpat. Congue, ut tortor, libero nibh, neque. Laoreet, diam interdum eu eget inceptos nec urna, sed laoreet taciti luctus. Congue taciti in euismod, primis a hendrerit commodo, ad leo rhoncus, sagittis, congue, ac, mattis. Tempus non primis sociosqu eros. Mollis molestie cursus inceptos sodales orci ipsum. Conubia nec, massa, eu id, laoreet, rhoncus, hac ligula donec magna quis eros, ligula, leo efficitur fringilla, molestie dolor. Et, vulputate integer finibus, cursus. Nisi, metus orci sapien congue, mattis, litora sociosqu feugiat, purus. Himenaeos sagittis, euismod vehicula sed blandit, ante sollicitudin cras magna. Porta, sem, imperdiet eleifend suscipit inceptos primis congue, quam, laoreet auctor dictum cursus nostra, orci, nec. Vehicula eros varius, et quis feugiat, blandit, eu porta, urna, at eleifend, nisl phasellus. Quis turpis viverra vestibulum facilisis auctor ultricies odio, sodales per porta, ac mauris, dolor. Ligula vivamus ornare velit interdum, ex, vitae, ultricies orci diam eros, in, luctus. Quis finibus, arcu dui, ultrices, lobortis pulvinar. Sociosqu sollicitudin at, urna dolor, dictum. Fusce hendrerit aenean viverra maximus ultrices, himenaeos porttitor. Porttitor per fusce nulla turpis vestibulum, sapien enim, semper. Nullam odio, arcu, aliquam tellus, vestibulum lobortis risus. Orci, augue consectetur nisl feugiat non blandit euismod, tellus odio, viverra ante. '+i,
-            summary:'Lorem ipsum dolor sit amet facilisis interdum placerat egestas est quis, imperdiet condimentum leo platea. In nunc iaculis quam, enim interdum, magna. Fringilla non, ornare viverra gravida molestie dui posuere, nisl odio, semper laoreet, non. A risus phasellus tincidunt vitae, nulla euismod elit, litora neque, nec facilisis nostra, tristique sit mollis. Nam mauris pharetra purus magna interdum porta, odio, egestas class mauris, diam maximus curabitur eleifend porttitor. Quisque eleifend, fringilla, adipiscing tristique nec elit lectus, etiam praesent duis lacinia, scelerisque nulla, ac. Vitae ante torquent mauris, proin fames tristique enim, pulvinar, accumsan molestie. Ante, sodales dictum orci, finibus elit, orci porta felis morbi pharetra nibh fermentum proin sapien finibus, leo, gravida.'+i,
-            event:'New moon',
-          });   
+          let fam=new Fam();   
+          fam.$fam="Lorem ipsum dolor sit amet orci cursus, amet, nibh, mi conubia sodales tortor, id, fames porttitor iaculis. Leo elit nullam porta, donec hac velit lobortis. Massa arcu sit placerat, suscipit magna in, integer at, nisl phasellus tincidunt primis class ultrices. Justo leo cursus auctor, rutrum vulputate venenatis dui, aliquet sociosqu. Ligula, leo massa, luctus, ultricies metus libero vestibulum, mauris, class ante amet, auctor at. Mi dolor ac, tempor efficitur elementum morbi laoreet vel, vehicula nulla, quam, non cursus, ante. Integer convallis dui, inceptos orci tellus. Quam, ullamcorper nam dictumst integer dapibus nisi, id. Tempor enim, aliquam quis mattis enim dictum malesuada. Donec vel, morbi tristique ad tellus iaculis ligula. Ante, finibus suspendisse tincidunt per dignissim mattis, congue, vitae. Vel orci hendrerit velit litora fusce sociosqu consectetur lorem, adipiscing eget sed quisque nec, et. Quis, convallis pharetra etiam vitae, elit sem, in, quam, ex, mauris, tristique. Egestas mollis conubia vulputate lacinia suspendisse eu, vehicula ornare nec, dignissim ex, venenatis velit libero elit porta. Nibh, congue lorem eu urna amet, aptent ac, augue rhoncus, porta, venenatis in, non eros, dolor, nec, conubia.";
+          fam.$summary="Lorem ipsum dolor sit amet ex nisi lectus rhoncus, donec ex, lorem viverra aenean. Urna, ante, arcu volutpat nibh diam maecenas ultrices, tellus tellus. Efficitur odio erat, interdum feugiat nisi, torquent velit risus ac, arcu, pulvinar dui, sit rhoncus donec. Vulputate nisl sodales tortor iaculis fermentum interdum, amet. Vivamus at pulvinar, porttitor, blandit bibendum. Sem posuere et auctor, tincidunt.";
+          
           this.fams.push(fam);       
       }
   }
@@ -39,13 +40,15 @@ export class ZfmService {
 		this.fams = value;
 	}
 
-	public get $place(): Place[] {
-		return this.place;
+
+	public get $places(): Array<Place> {
+		return this.places;
 	}
 
-	public set $place(value: Place[]) {
-		this.place = value;
+	public set $places(value: Array<Place>) {
+		this.places = value;
 	}
+	
 
 
   public myData() {
