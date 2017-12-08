@@ -4,6 +4,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 
+// import {ZfmService} from './services/zfm.service';
+
 // Import containers
 import {
   FullLayoutComponent,
@@ -82,7 +84,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  }
+],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
