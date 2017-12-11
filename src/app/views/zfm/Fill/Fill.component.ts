@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import {ZfmService} from '../../../services/zfm.service';
 
 @Component({
   selector: 'app-Fill',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Fill.component.scss']
 })
 export class FillComponent implements OnInit {
-
+  @Input() actionUser:String;
+  @Input() zfmService:ZfmService;
   constructor() { }
 
   ngOnInit() {
