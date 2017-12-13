@@ -6,6 +6,8 @@ import { LookComponent } from './Look/Look.component';
 import { FillComponent } from './Fill/Fill.component';
 import { ZfmService } from '../../services/zfm.service';
 
+import { BaseComponent } from './base/base.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,8 @@ import { ZfmService } from '../../services/zfm.service';
   declarations: [ZfmComponent,
     LookComponent,
     FillComponent
+,
+    BaseComponent
 ]
 })
 export class ZfmModule { }

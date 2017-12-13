@@ -15,6 +15,7 @@ export class ZfmComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 onCollapsedLook(collapsed:boolean){
