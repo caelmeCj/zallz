@@ -4,10 +4,8 @@ export class Place {
     private lon:number;
 
 
-	constructor(field) {
-        this.place=field.place;
-        this.lat=field.lat;
-        this.lon=field.lon;
+	constructor() {
+       
 	}
     
 

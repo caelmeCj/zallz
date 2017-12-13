@@ -1,32 +1,40 @@
 <div class="animated fadeIn">
   <div class="row">
     <div *ngIf="this.base.$isCollapsed" class="col-sm-12 col-lg-2">
-      <input type="" name="" value="">
+      <label for="">---{{this.filter.event}}--- </label>
+      <input type="" name="" value="" [(ngModel)]="this.filter.event">
     </div>
     <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-10 row':'col-sm-12 col-lg-12 row'">
-      <div *ngFor="let fam of this.getToShow()" class="col-sm-6 col-lg-3">
-      <div class="card {{fam.$event=='new_moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='passover'?'text-white bg-danger':(fam.$event=='pentekost'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+      <ng-container *ngFor="let fam of this.zfm.$fams">
+        <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
+        && (fam.$event.indexOf(this.filter.event)!=-1 || this.filter.event=='') 
+        && (fam.$summary.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
+        && (fam.$fam.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
+        && (fam.$place.$place.indexOf(this.filter.place)!=-1 || this.filter.place=='' )
+        && (fam.$timeLong.indexOf(this.filter.timeLong)!=-1 || this.filter.timeLong=='' ) " class="col-sm-6 col-lg-3">
+          <div class="card {{fam.$event=='new_moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='passover'?'text-white bg-danger':(fam.$event=='pentekost'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
+            <div class="card-body pb-0">
+              <div class="btn-group float-right" dropdown>
+                <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
                   <i class="icon-settings"></i>
                 </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Enter</a>
-              <a class="dropdown-item" href="#">Look</a>
-              <a class="dropdown-item" href="#">Fill</a>
+                <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+                  <a class="dropdown-item" href="#">Enter</a>
+                  <a class="dropdown-item" href="#">Look</a>
+                  <a class="dropdown-item" href="#">Fill</a>
+                </div>
+              </div>
+              <h4 class="mb-0">{{fam.$event}}</h4>
+              <p>{{fam.$date | date: 'dd/MM/yyyy'}} </p>
+              <!--<p (click)="this.changeCollapse()">{{this.base.$isCollapsed?'col-sm-12 col-lg-9 row':'col-sm-12 col-lg-12 '}} </p>-->
+            </div>
+            <div class="chart-wrapper px-3" style="height:70px;">
+
             </div>
           </div>
-          <h4 class="mb-0">{{fam.$event}}</h4>
-          <p>{{fam.$date | date: 'dd/MM/yyyy'}} </p>
-          <!--<p (click)="this.changeCollapse()">{{this.base.$isCollapsed?'col-sm-12 col-lg-9 row':'col-sm-12 col-lg-12 '}} </p>-->
         </div>
-        <div class="chart-wrapper px-3" style="height:70px;">
+      </ng-container>
+    </div>
 
-        </div>
-      </div>
-    </div>
-    </div>
-    
   </div>
 </div>
