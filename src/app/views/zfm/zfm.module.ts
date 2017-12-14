@@ -8,12 +8,14 @@ import { ZfmService } from '../../services/zfm.service';
 import { FormsModule } from '@angular/forms';
 import { BaseComponent } from './base/base.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   imports: [
     CommonModule,
     ZfmRoutingRoutes,
     BsDropdownModule,
-    FormsModule  
+    FormsModule,
+    NgxPaginationModule
   ],
   providers:[ZfmService],
   declarations: [ZfmComponent,

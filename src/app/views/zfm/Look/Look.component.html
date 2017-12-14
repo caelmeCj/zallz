@@ -5,13 +5,14 @@
       <input type="" name="" value="" [(ngModel)]="this.filter.event">
     </div>
     <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-10 row':'col-sm-12 col-lg-12 row'">
-      <ng-container *ngFor="let fam of this.zfm.$fams">
-        <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
+      <ng-container *ngFor="let fam of this.getToShow() | paginate: { itemsPerPage: 10, currentPage: p }">
+        <!-- <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
         && (fam.$event.indexOf(this.filter.event)!=-1 || this.filter.event=='') 
         && (fam.$summary.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
         && (fam.$fam.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
         && (fam.$place.$place.indexOf(this.filter.place)!=-1 || this.filter.place=='' )
-        && (fam.$timeLong.indexOf(this.filter.timeLong)!=-1 || this.filter.timeLong=='' ) " class="col-sm-6 col-lg-3">
+        && (fam.$timeLong.indexOf(this.filter.timeLong)!=-1 || this.filter.timeLong=='' ) " class="col-sm-6 col-lg-3"> -->
+        <div class="col-sm-6 col-lg-3">
           <div class="card {{fam.$event=='new_moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='passover'?'text-white bg-danger':(fam.$event=='pentekost'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
             <div class="card-body pb-0">
               <div class="btn-group float-right" dropdown>
@@ -34,7 +35,9 @@
           </div>
         </div>
       </ng-container>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 
   </div>
 </div>
+

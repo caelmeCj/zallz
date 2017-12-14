@@ -2,7 +2,7 @@ import { Component, OnInit,EventEmitter,Output,Input } from '@angular/core';
 import {ZfmService} from '../../../services/zfm.service';
 import {BaseService} from '../../../services/base.service';
 import {BaseComponent} from '../base/base.component';
-// import {Fam} from '../../../models/fam';
+import {Fam} from '../../../models/fam';
 @Component({
   selector: 'app-Look',
   templateUrl: './Look.component.html',
@@ -14,7 +14,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   @Output() onCollapsed = new EventEmitter<boolean>();
   try:string='try';
   collapsed=false;
-
+  p: number = 1;
   private filter:any={
     event:'',
     contain:'',
@@ -44,6 +44,8 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   getToShow(){
     this.hideLook=[];
+  let ToShow:Fam[]=[];
+
     for(var fam of this.zfm.$fams){
       var ok=true;
       if(this.filter.num!=0 && fam.$num!=this.filter.num){
@@ -66,10 +68,11 @@ export class LookComponent extends BaseComponent implements OnInit {
       // }
       if(!ok){
         this.hideLook.push(fam.$num);
+      }else{
+        ToShow.push(fam);
       }
-      
     }
-    
+    return ToShow;
     // return this.zfm.$fams; 
   }
 
