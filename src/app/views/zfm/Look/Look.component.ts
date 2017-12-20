@@ -18,7 +18,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   private filter:any={
     event:'',
     contain:'',
-    date:Date,
+    date:'',
     place:'',
     timeLong:'',
     num:0,
@@ -78,6 +78,12 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   Change(){
     // this.onChanged.emit(true);
+  }
+
+  selectFam(fam:Fam){
+    this.zfm.$selectedFam=fam;
+
+    this.changeScreen('zfm/look/detail');
   }
 
   onChanged(){

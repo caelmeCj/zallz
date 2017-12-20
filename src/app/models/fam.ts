@@ -1,13 +1,16 @@
 import {Place} from './place';
 import {Base} from './base';
+import * as moment from 'moment';
 export class Fam extends Base{
     private num:number;
     private fam:String;
     private summary:String;
     private event:String;
     private date:Date;
+	private dateString:String;
     private place:Place;
     private timeLong:String;
+	private dateObj:any;
 
     // constructor(){}
 
@@ -64,6 +67,15 @@ export class Fam extends Base{
 		this.date = value;
 	}
 
+
+	public get $dateString(): String {
+		return this.dateString;
+	}
+
+	public set $dateString(value: String) {
+		this.dateString = value;
+	}	
+
 	public get $timeLong(): String {
 		return this.timeLong;
 	}
@@ -71,6 +83,18 @@ export class Fam extends Base{
 	public set $timeLong(value: String) {
 		this.timeLong = value;
 	}
-    
 
+
+	public get $dateObj(): any  {
+		return this.dateObj;
+	}
+
+	public set $dateObj(value: any ) {
+
+		this.dateObj = value;
+		
+		this.date=moment(""+this.dateObj.date.day+"/"+this.dateObj.date.month+"/"+this.dateObj.date.year,"DD/MM/YYYY").toDate();
+	}
+	
+  
 }

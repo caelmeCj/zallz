@@ -9,13 +9,23 @@ import { FormsModule } from '@angular/forms';
 import { BaseComponent } from './base/base.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {FroalaEditorModule,FroalaViewModule} from 'angular-froala-wysiwyg';
+import { DetailLookComponent } from './DetailLook/DetailLook.component';
+import { MyDatePickerModule} from 'mydatepicker';
+
+// import {TimePickerComponent} from "angular2-timepicker/timepicker-component";
+
 @NgModule({
   imports: [
     CommonModule,
     ZfmRoutingRoutes,
     BsDropdownModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MyDatePickerModule,
+    
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers:[ZfmService],
   declarations: [ZfmComponent,
@@ -23,6 +33,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FillComponent
 ,
     BaseComponent
+,
+    DetailLookComponent
 ]
 })
 export class ZfmModule { }

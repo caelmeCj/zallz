@@ -5,7 +5,10 @@ export class BaseService {
 private isCollapsed:boolean;
 private screen:string;
 private actionUser:string;
-constructor() { }
+constructor() {
+	// this.screen="look";
+	
+ }
 
 	public get $isCollapsed(): boolean {
 		return this.isCollapsed;

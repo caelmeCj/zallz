@@ -1,0 +1,77 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12">
+
+      <div class="card">
+        <div class="card-header">
+          <h4>Général Information</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="">Event</label>
+              
+                <select id="select-searchfield" [(ngModel)]="this.zfm.$selectedFam.$event"
+                name="select-searchfield" class="form-control">
+                  <option value="" selected>Event</option>
+                  <option value="sab">Sabath</option>
+                  <option value="new_moon">New Moon</option>
+                  <option value="passover">Passover</option>
+                  <option value="feast">Feast</option>
+                  <option value="pentekost">Pentekost</option>
+                  <option value="other">Other</option>
+                </select>  
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="">Date</label>
+              <!--<input class="form-control" type="" moment-picker="this.zfm.$selectedFam.$date"
+               name="" [ngModel]="this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy'" 
+               (ngModelChange)="this.zfm.$selectedFam.$dateString=$event" >-->
+               <my-date-picker name="mydate" [ngModel]="this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy'" 
+               (ngModelChange)="this.zfm.$selectedFam.$dateObj=$event" [options]="myDatePickerOptions" required> </my-date-picker>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="">Place</label>
+              <input class="form-control" type="" name="" disabled [(ngModel)]="this.zfm.$selectedFam.$place.$place">
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="">Duration</label>
+              <input class="form-control" type="" name="" [(ngModel)]="this.zfm.$selectedFam.$timeLong" >
+              <!--<owl-date-time ></owl-date-time>-->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <div class="col-sm-12 col-lg-5">
+
+      <div class="card">
+        <div class="card-header pb-0">
+          <h4 class="mb-0">Summary</h4>
+          <p>{{this.zfm.$selectedFam.$event}} | {{this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy' }} </p>
+        </div>
+        <div>
+          <textarea [froalaEditor] [(froalaModel)]="this.zfm.$selectedFam.$summary"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-7">
+      <div class="card">
+        <div class="card-header pb-0">
+          <h4 class="mb-0">Content</h4>
+          <p>{{this.zfm.$selectedFam.$event}} | {{this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy' }} ({{this.zfm.$selectedFam.$place.$place}})</p>
+        </div>
+        <div>
+          <textarea [froalaEditor] [(froalaModel)]="this.zfm.$selectedFam.$fam"></textarea>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -14,7 +14,6 @@ export class FillComponent extends BaseComponent implements OnInit {
   constructor( zfm:ZfmService,base:BaseService) { super(zfm,base);}
 
   ngOnInit() {
-    this.changeScreen("zfm/fill");
+    this.changeScreen("zfm/fill"); 
   }
-
 }

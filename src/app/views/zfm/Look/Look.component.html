@@ -1,11 +1,61 @@
 <div class="animated fadeIn">
   <div class="row">
     <div *ngIf="this.base.$isCollapsed" class="col-sm-12 col-lg-2">
-      <label for="">---{{this.filter.event}}--- </label>
-      <input type="" name="" value="" [(ngModel)]="this.filter.event">
+      <div class="card">
+        <div class="card-header">
+          Filter
+        </div>
+        <div class="card-body">
+          <form action="" method="post">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" id="contain-searchfield" [(ngModel)]="this.filter.contain" name="contain-searchfield" class="form-control" placeholder="Content Search">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <select id="select-searchfield" [(ngModel)]="this.filter.event" name="select-searchfield" class="form-control">
+                  <option value="" selected>Event</option>
+                  <option value="sab">Sabath</option>
+                  <option value="new_moon">New Moon</option>
+                  <option value="passover">Passover</option>
+                  <option value="feast">Feast</option>
+                  <option value="pentekost">Pentekost</option>
+                  <option value="other">Other</option>
+                </select>                
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="date" id="date-searchfield" name="date-searchfield" class="form-control" placeholder="Date">
+                <!--<ngx-datepicker [(ngModel)]="this.filter.date"></ngx-datepicker>-->
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" id="place-searchfield" name="place-searchfield" class="form-control" placeholder="Place">
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" id="time-searchfield" name="time-searchfield" class="form-control" placeholder="TimeLong">
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+              </div>
+            </div>
+            <div class="form-group form-actions">
+              <button type="submit" class="btn btn-sm btn-secondary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
     <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-10 row':'col-sm-12 col-lg-12 row'">
-      <ng-container *ngFor="let fam of this.getToShow() | paginate: { itemsPerPage: 10, currentPage: p }">
+      <ng-container *ngFor="let fam of this.getToShow() | paginate: { itemsPerPage: 12, currentPage: p }">
         <!-- <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
         && (fam.$event.indexOf(this.filter.event)!=-1 || this.filter.event=='') 
         && (fam.$summary.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
@@ -16,13 +66,13 @@
           <div class="card {{fam.$event=='new_moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='passover'?'text-white bg-danger':(fam.$event=='pentekost'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
             <div class="card-body pb-0">
               <div class="btn-group float-right" dropdown>
-                <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+                <button type="button" class="btn btn-transparent dropdown-toggle p-0 black" dropdownToggle>
                   <i class="icon-settings"></i>
                 </button>
-                <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-                  <a class="dropdown-item" href="#">Enter</a>
-                  <a class="dropdown-item" href="#">Look</a>
-                  <a class="dropdown-item" href="#">Fill</a>
+                <div class="dropdown-menu dropdown-menu-right " *dropdownMenu>
+                  <a class="dropdown-item" (click)="this.selectFam(fam)">Look</a>
+                  <a class="dropdown-item" href="#">Remove</a>
+                  <a class="dropdown-item" href="#">Quick modif</a>
                 </div>
               </div>
               <h4 class="mb-0">{{fam.$event}}</h4>
