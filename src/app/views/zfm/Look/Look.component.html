@@ -30,10 +30,10 @@
             <div class="form-group">
               <label for="">{{this.filter.date}} </label>
               <div class="input-group">
-               <my-date-picker name="mydate" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'" 
-               (ngModelChange)="this.$dateFilter=$event" [options]="this.myDatePickerOptions" required> </my-date-picker>
-                <!--<ngx-datepicker [(ngModel)]="this.filter.date"></ngx-datepicker>-->
-                
+              <input type="text" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'"  id="date-searchfield" name="date-searchfield" class="form-control" placeholder="Date">   
+              <span class="input-group-addon"><my-date-picker name="mydate" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'" 
+                (ngModelChange)="this.$dateFilter=$event" [options]="this.myDatePickerOptions" required></my-date-picker></span>
+               
               </div>
             </div>
             <div class="form-group">

@@ -64,7 +64,7 @@ export class LookComponent extends BaseComponent implements OnInit {
       else if(this.filter.timeLong!='' && fam.$timeLong.indexOf(this.filter.timeLong)==-1){
         ok=false;
       }
-      else if(this.filter.date!=null && !moment(this.filter.date).isSame(fam.$date.getDate)){
+      else if(moment(this.filter.date).year() > 10 && !moment(this.filter.date).isSame(fam.$date)){
         ok=false;
       }
       // console.log(this.filter.Date)
