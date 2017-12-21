@@ -22,8 +22,6 @@
         "scss/style.scss",
         "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
         "../node_modules/froala-editor/css/froala_style.min.css"
-  
-        
       ],
       "scripts": [
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
@@ -31,7 +29,6 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/froala-editor/js/froala_editor.pkgd.min.js",
         "../node_modules/moment/min/moment.min.js"
-
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -4,7 +4,21 @@
 
       <div class="card">
         <div class="card-header">
-          <h4>Général Information</h4>
+          <div class="row">
+            <div class="col-sm-10">
+              <h4>Général Information</h4>
+            </div>
+            
+            <div class="col-sm-2">              
+              <button class="btn btn-success float-right" (click)="this.changeScreen('zfm/look')" >
+                <i class="fa fa-check fa-lg mt-4"></i>
+              </button>
+              <button class="btn float-right">
+                <i class="fa fa-undo fa-lg mt-4"></i>
+              </button>
+            </div>
+          </div>
+          
         </div>
         <div class="card-body">
           <div class="row">

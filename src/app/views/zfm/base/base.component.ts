@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseService} from '../../../services/base.service';
 import {ZfmService} from '../../../services/zfm.service';
+import {IMyDpOptions} from 'mydatepicker';
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
@@ -8,6 +9,10 @@ import {ZfmService} from '../../../services/zfm.service';
 })
 export class BaseComponent implements OnInit {
 
+  public myDatePickerOptions: IMyDpOptions = {
+        // other options...
+        dateFormat: 'dd/mm/yyyy',
+    };
   constructor(protected zfm:ZfmService,protected base:BaseService) { }
 
   ngOnInit() {

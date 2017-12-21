@@ -3,6 +3,7 @@ import {ZfmService} from '../../../services/zfm.service';
 import {BaseService} from '../../../services/base.service';
 import {BaseComponent} from '../base/base.component';
 import {Fam} from '../../../models/fam';
+import * as moment from 'moment';
 @Component({
   selector: 'app-Look',
   templateUrl: './Look.component.html',
@@ -18,7 +19,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   private filter:any={
     event:'',
     contain:'',
-    date:'',
+    date:moment('01-01-0001','DD/MM/YYYY').toDate(),
     place:'',
     timeLong:'',
     num:0,
@@ -38,7 +39,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.changeScreen("zfm/look");
-
+    
   }
 
 
@@ -63,9 +64,10 @@ export class LookComponent extends BaseComponent implements OnInit {
       else if(this.filter.timeLong!='' && fam.$timeLong.indexOf(this.filter.timeLong)==-1){
         ok=false;
       }
-      // else if(this.filter.date!='' && fam.$date.getDate!=this.filter.date.){
-      //   ok=false;
-      // }
+      else if(this.filter.date!=null && !moment(this.filter.date).isSame(fam.$date.getDate)){
+        ok=false;
+      }
+      // console.log(this.filter.Date)
       if(!ok){
         this.hideLook.push(fam.$num);
       }else{
@@ -89,5 +91,10 @@ export class LookComponent extends BaseComponent implements OnInit {
   onChanged(){
 
   }
+
+  public set $dateFilter(value: any ) {
+		// this.dateObj = value;
+		this.filter.date=moment(""+value.date.day+"/"+value.date.month+"/"+value.date.year,"DD/MM/YYYY").toDate();
+	}
 
 }

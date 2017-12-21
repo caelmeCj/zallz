@@ -11,10 +11,7 @@ import * as moment from 'moment';
 })
 export class DetailLookComponent extends BaseComponent implements OnInit {
 
-  public myDatePickerOptions: IMyDpOptions = {
-        // other options...
-        dateFormat: 'dd/mm/yyyy',
-    };
+  
   
   // public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(zfm:ZfmService,base:BaseService) { super(zfm,base);}
