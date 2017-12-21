@@ -15,7 +15,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   @Output() onCollapsed = new EventEmitter<boolean>();
   try:string='try';
   collapsed=false;
-  p: number = 1;
+  p: number = 1; 
   private filter:any={
     event:'',
     contain:'',

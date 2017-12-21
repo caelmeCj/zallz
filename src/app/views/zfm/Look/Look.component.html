@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <div class="row">
-    <div *ngIf="this.base.$isCollapsed" class="col-sm-12 col-lg-2">
+    <div *ngIf="this.base.$isCollapsed" class="filter-part col-sm-12 col-lg-2">
       <div class="card">
         <div class="card-header">
           Filter
@@ -31,7 +31,8 @@
               <label for="">{{this.filter.date}} </label>
               <div class="input-group">
               <input type="text" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'"  id="date-searchfield" name="date-searchfield" class="form-control" placeholder="Date">   
-              <span class="input-group-addon"><my-date-picker name="mydate" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'" 
+              <span class="input-group-addon hideinputpicker">
+                <my-date-picker name="mydate" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'" 
                 (ngModelChange)="this.$dateFilter=$event" [options]="this.myDatePickerOptions" required></my-date-picker></span>
                
               </div>
