@@ -33,7 +33,7 @@ export class ZfmService {
           fam.$dateObj={ date: { year: 2018, month: 10, day: 9 } };
           fam.$event="new_moon";
           fam.$place=place; place.$place="cite_itaosy"
-          fam.$timeLong="01:45:00";
+          fam.$timeLong=new Date();
           if(i==2) fam.$event="sab";
           this.fams.push(fam);       
       }

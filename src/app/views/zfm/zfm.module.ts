@@ -12,7 +12,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {FroalaEditorModule,FroalaViewModule} from 'angular-froala-wysiwyg';
 import { DetailLookComponent } from './DetailLook/DetailLook.component';
 import { MyDatePickerModule} from 'mydatepicker';
-
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 // import {TimePickerComponent} from "angular2-timepicker/timepicker-component";
 
 @NgModule({
@@ -23,7 +23,7 @@ import { MyDatePickerModule} from 'mydatepicker';
     FormsModule,
     NgxPaginationModule,
     MyDatePickerModule,
-    
+    TimepickerModule.forRoot(),
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],

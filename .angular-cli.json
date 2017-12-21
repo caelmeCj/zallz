@@ -1,14 +1,15 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.6",
-    "name": "@coreui/angular"
+    "name": "@coreui/zallM2"
   },
   "apps": [
     {
       "root": "src",
       "outDir": "dist",
-      "assets": ["assets"],
+      "assets": [
+        "assets"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -59,7 +60,6 @@
     }
   },
   "defaults": {
-    "styleExt": "scss",
-    "prefixInterfaces": false
+    "styleExt": "scss"
   }
 }

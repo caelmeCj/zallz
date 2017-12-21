@@ -9,7 +9,7 @@ export class Fam extends Base{
     private date:Date;
 	private dateString:String;
     private place:Place;
-    private timeLong:String;
+    private timeLong:Date;
 	private dateObj:any;
 
     // constructor(){}
@@ -76,13 +76,15 @@ export class Fam extends Base{
 		this.dateString = value;
 	}	
 
-	public get $timeLong(): String {
+
+	public get $timeLong(): Date {
 		return this.timeLong;
 	}
 
-	public set $timeLong(value: String) {
+	public set $timeLong(value: Date) {
 		this.timeLong = value;
 	}
+	
 
 
 	public get $dateObj(): any  {

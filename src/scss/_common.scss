@@ -1,15 +1,22 @@
 .hideinputpicker{    
-    display:block;
-    .ng-pristine{
-        display:none;
-    }
-    .selectiongroup{
-        background:transparent;
-    }
-    .mydp{
-        border:none;
-    }
-   .selbtngroup{
-       width:auto;
-   }
-}
+    padding: 0 0.75rem;
+     input[ngtype="text"]{
+         display:none;
+     }
+     
+     
+     .mydp{
+         border:none;
+         .selbtngroup{
+            width:auto;
+        }
+        .btnpicker {
+            background:transparent;   
+            // height: ;    
+        }
+        .selectiongroup{
+            background:transparent;         
+        }
+     }
+    
+ }

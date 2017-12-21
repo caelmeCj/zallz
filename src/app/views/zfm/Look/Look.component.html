@@ -45,8 +45,10 @@
             </div>
             <div class="form-group">
               <div class="input-group">
-                <input type="text" id="time-searchfield" name="time-searchfield" class="form-control" placeholder="TimeLong">
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                <timepicker [(ngModel)]="this.filter.timeLong" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                {{this.filter.timeLong | date:'hh:mm'}}
+                <!-- <input type="text" id="time-searchfield" name="time-searchfield" class="form-control" placeholder="TimeLong"> -->
+                <!-- <span class="input-group-addon"><i class="fa fa-asterisk"></i></span> -->
               </div>
             </div>
             <div class="form-group form-actions">
