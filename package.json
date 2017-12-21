@@ -1,5 +1,5 @@
 {
-  "name": "@coreui/angular",
+  "name": "@coreui/zallM2",
   "version": "1.0.6",
   "description": "Open Source Bootstrap Admin Template",
   "author": "Łukasz Holeczek",
@@ -31,7 +31,6 @@
     "@types/bootstrap.timepicker": "0.0.33",
     "@types/moment": "^2.13.0",
     "angular-froala-wysiwyg": "^2.7.3",
-    
     "bootstrap": "4.0.0-beta.2",
     "chart.js": "2.7.1",
     "core-js": "2.5.1",
