@@ -35,6 +35,7 @@ import {
 })
 export class LookComponent extends BaseComponent implements OnInit {
 
+  
 
   @Output() onCollapsed = new EventEmitter < boolean > ();
   try: string = 'try';
@@ -45,7 +46,11 @@ export class LookComponent extends BaseComponent implements OnInit {
     event: '',
     contain: '',
     date: moment('01/01/0001', 'DD/MM/YYYY').toDate(),
+    date_month:false,
+    date_year:false,
     date_range: [moment('01/01/0001', 'DD/MM/YYYY').toDate(), moment('01/01/0001', 'DD/MM/YYYY').toDate()],
+    date_range_month:false,
+    date_range_year:false,
     place: '',
     timeLong: moment('00:00', 'hh:mm').toDate(),
     time1: moment('00:00', 'hh:mm').toDate(),
@@ -76,9 +81,9 @@ export class LookComponent extends BaseComponent implements OnInit {
     defineLocale('fr', fr);
     this.dpConfig.containerClass = 'theme-blue';
     this.dpConfig.locale = 'fr';
-    this.dpConfig.dateInputFormat="DD/MM/YYYY";
-    this.dpConfig.maxDate=new Date();
-    this.dpConfig.value=new Date();
+    this.dpConfig.dateInputFormat = "DD/MM/YYYY";
+    this.dpConfig.maxDate = new Date();
+    this.dpConfig.value = new Date();
   }
 
   ngOnInit() {
@@ -93,6 +98,7 @@ export class LookComponent extends BaseComponent implements OnInit {
     // console.log(moment(this.filter.date).format("YYYY-MM-DD"),moment(this.zfm.$fams[0].$date).format("YYYY-MM-DD"))
     for (var fam of this.zfm.$fams) {
       var ok = true;
+      
       if (this.filter.num != 0 && fam.$num != this.filter.num) {
         ok = false;
       } else if (this.filter.event != '' && fam.$event.indexOf(this.filter.event) == -1) {
@@ -101,25 +107,53 @@ export class LookComponent extends BaseComponent implements OnInit {
         ok = false;
       } else if (this.filter.place != '' && fam.$place.$place.indexOf(this.filter.place) == -1) {
         ok = false;
-      } else if (moment(this.filter.time1).hour() > 0 && moment(this.filter.time2).hour() > 0) {
-        var timeA = moment({
-          h: moment(this.filter.time1).hour(),
-          m: moment(this.filter.time1).minute()
-        });
-        var timeB = moment({
-          h: moment(this.filter.time2).hour(),
-          m: moment(this.filter.time2).minute()
-        });
-        var timeC = moment({
-          h: moment(fam.$timeLong).hour(),
-          m: moment(fam.$timeLong).minute()
-        });
-        if (!timeC.isBetween(timeA, timeB))
+      } else if (moment(this.filter.time1).hour() > 0 || moment(this.filter.time1).minute()>0) {
+        if (moment(this.filter.time2).hour() > 0 || moment(this.filter.time2).minute() > 0) {
+          var timeA = moment({
+            h: moment(this.filter.time1).hour(),
+            m: moment(this.filter.time1).minute()
+          });
+          var timeB = moment({
+            h: moment(this.filter.time2).hour(),
+            m: moment(this.filter.time2).minute()
+          });
+          var timeC = moment({
+            h: moment(fam.$timeLong).hour(),
+            m: moment(fam.$timeLong).minute()
+          });
+          if (!timeC.isBetween(timeA, timeB))
+            ok = false;
+        } else {
+          var timeA = moment({
+            h: moment(this.filter.time1).hour(),
+            m: moment(this.filter.time1).minute()
+          });
+          var timeC = moment({
+            h: moment(fam.$timeLong).hour(),
+            m: moment(fam.$timeLong).minute()
+          });
+          if (!timeC.isSame(timeA)) {
+            ok = false
+          }
+
+        }
+      } else if (moment(this.filter.date).year() > 10) {
+        if(this.filter.date_year ){
+          if(moment(this.filter.date).year()!=moment(fam.$date).year() || (this.filter.date_month && moment(this.filter.date).month()!=moment(fam.$date).month()))
+            ok=false
+        }
+        else if(!moment(this.filter.date).isSame(fam.$date))
           ok = false;
-      } else if (moment(this.filter.date).year() > 10 && !moment(this.filter.date).isSame(fam.$date)) {
-        ok = false;
-      } else if (moment(this.filter.date).year() > 10 && !moment(this.filter.date).isSame(fam.$date)) {
-        ok = false;
+      } else if (moment(this.filter.date_range[0]).year() > 10 && moment(this.filter.date_range[1]).year() > 10 
+        ) {
+          if(this.filter.date_range_year ){
+            if(moment(this.filter.date_range[0]).year()>moment(fam.$date).year() || (moment(this.filter.date_range[1]).year()<moment(fam.$date).year()
+               || (this.filter.date_range_month && (moment(this.filter.date_range[0]).month()>moment(fam.$date).month() || moment(this.filter.date_range[1]).month()<moment(fam.$date).month()))))
+              ok=false
+          }
+          else if(!moment(fam.$date).isBetween(this.filter.date_range[0], this.filter.date_range[1]))
+            ok = false;
+        // ok = false;
       }
       // console.log(this.filter.Date)
       if (!ok) {
@@ -151,4 +185,19 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.filter.date = moment("" + value.date.day + "/" + value.date.month + "/" + value.date.year, "DD/MM/YYYY").toDate();
   }
 
+  public toggleDateMonth(){
+    this.filter.date_month=!this.filter.date_month;
+  }
+  public toggleDateYear(){
+    this.filter.date_year=!this.filter.date_year;
+  }
+  public toggleDateRangeMonth(){
+    this.filter.date_range_month=!this.filter.date_range_month;
+  }
+  public toggleDateRangeYear(){
+    this.filter.date_range_year=!this.filter.date_range_year;
+  }
+
+
 }
+

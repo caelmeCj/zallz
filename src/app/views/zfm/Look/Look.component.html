@@ -41,14 +41,18 @@
               <!--<label for="">Time long</label>-->
               <div class="input-group">
                 <input placeholder="Datepicker" [bsConfig]="dpConfig" [(ngModel)]="this.filter.date" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
-                 <span class="input-group-addon" (click)="dp.toggle()" ><i class="fa fa-calendar"></i></span>
+                <span class="input-group-addon {{this.date_month?'bg-primary':''}}" (click)="this.toggleDateMonth()" >month</span>
+                <span class="input-group-addon {{this.filter.date_year?'bg-primary':''}}" (click)="this.toggleDateYear()" >year</span> 
+                <span class="input-group-addon" (click)="dp.toggle()" ><i class="fa fa-calendar"></i></span>
               </div>
             </div>
             <div class="form-group">
               <!--<label for="">Time long</label>-->
               <div class="input-group">
                 <input class="form-control" [bsConfig]="bsRangeConfig" #drp="bsDaterangepicker" [ngModelOptions]="{standalone: true}" bsDaterangepicker [(ngModel)]="this.filter.date_range">
-                 <span class="input-group-addon" (click)="drp.toggle()" ><i class="fa fa-calendar"></i>&nbsp;<i class="fa fa-calendar"></i></span>
+                <span class="input-group-addon {{this.filter.date_range_month?'bg-primary':''}}" (click)="this.toggleDateRangeMonth()" >month</span>
+                <span class="input-group-addon {{this.filter.date_range_year?'bg-primary':''}}" (click)="this.toggleDateRangeYear()" >year</span>  
+                <span class="input-group-addon" (click)="drp.toggle()" ><i class="fa fa-calendar"></i>&nbsp;<i class="fa fa-calendar"></i></span>
               </div>
             </div>
             
