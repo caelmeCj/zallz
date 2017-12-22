@@ -9,7 +9,7 @@
           <form action="" method="post">
             <div class="form-group">
               <div class="input-group">
-                <input type="text" id="contain-searchfield" [(ngModel)]="this.filter.contain" name="contain-searchfield" class="form-control" placeholder="Content Search">
+                <input type="text" id="contain-searchfield" [ngModel]="this.contain" (ngModelChange)="this.$contain=$event" name="contain-searchfield" class="form-control" placeholder="Content Search">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
               </div>
             </div>
@@ -118,8 +118,7 @@
           </div>
         </div>
       </ng-container>
-      <p class="card-text" ngNonBindable>{{ this.promise }}</p> 
-      <p class="card-text">{{ this.promise | async  }}</p> 
+      
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 
