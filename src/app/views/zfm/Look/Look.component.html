@@ -16,7 +16,7 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <select id="select-searchfield" [(ngModel)]="this.filter.event" name="select-searchfield" class="form-control">
+                <select id="select-searchfield" [ngModel]="this.event" (ngModelChange)="this.$events=$event" name="select-searchfield" class="form-control">
                   <option value="" selected>Event</option>
                   <option value="sab">Sabath</option>
                   <option value="new_moon">New Moon</option>
@@ -40,18 +40,19 @@
             <div class="form-group">
               <!--<label for="">Time long</label>-->
               <div class="input-group">
-                <input placeholder="Datepicker" [bsConfig]="dpConfig" [(ngModel)]="this.filter.date" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
+                <input placeholder="Datepicker" [bsConfig]="dpConfig" [ngModel]="this.date" (ngModelChange)="this.$date=$event" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
                 <span class="input-group-addon {{this.date_month?'bg-primary':''}}" (click)="this.toggleDateMonth()" >month</span>
-                <span class="input-group-addon {{this.filter.date_year?'bg-primary':''}}" (click)="this.toggleDateYear()" >year</span> 
+                <span class="input-group-addon {{this.date_year?'bg-primary':''}}" (click)="this.toggleDateYear()" >year</span> 
                 <span class="input-group-addon" (click)="dp.toggle()" ><i class="fa fa-calendar"></i></span>
               </div>
             </div>
             <div class="form-group">
               <!--<label for="">Time long</label>-->
               <div class="input-group">
-                <input class="form-control" [bsConfig]="bsRangeConfig" #drp="bsDaterangepicker" [ngModelOptions]="{standalone: true}" bsDaterangepicker [(ngModel)]="this.filter.date_range">
-                <span class="input-group-addon {{this.filter.date_range_month?'bg-primary':''}}" (click)="this.toggleDateRangeMonth()" >month</span>
-                <span class="input-group-addon {{this.filter.date_range_year?'bg-primary':''}}" (click)="this.toggleDateRangeYear()" >year</span>  
+                <input class="form-control" [bsConfig]="bsRangeConfig" #drp="bsDaterangepicker" [ngModelOptions]="{standalone: true}" bsDaterangepicker 
+                [ngModel]="this.date_range" (ngModelChange)="this.$date_range=$event">
+                <span class="input-group-addon {{this.date_range_month?'bg-primary':''}}" (click)="this.toggleDateRangeMonth()" >month</span>
+                <span class="input-group-addon {{this.date_range_year?'bg-primary':''}}" (click)="this.toggleDateRangeYear()" >year</span>  
                 <span class="input-group-addon" (click)="drp.toggle()" ><i class="fa fa-calendar"></i>&nbsp;<i class="fa fa-calendar"></i></span>
               </div>
             </div>
@@ -67,8 +68,8 @@
               <!--<label for="">Time long</label>-->
               <div class="input-group">
                 
-                <timepicker [(ngModel)]="this.filter.time1" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
-                <timepicker [(ngModel)]="this.filter.time2" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker [ngModel]="this.time1" (ngModelChange)="this.$time1=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker [ngModel]="this.time2" (ngModelChange)="this.$time2=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
                 <!--{{this.filter.time1 | date:'hh:mm'}}               -->
               </div>
             </div>
@@ -87,7 +88,7 @@
 
     </div>
     <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-9 row':'col-sm-12 col-lg-12 row'">
-      <ng-container *ngFor="let fam of this.getToShow() | paginate: { itemsPerPage: 12, currentPage: p }">
+      <ng-container *ngFor="let fam of (this.toShow | async) | paginate: { itemsPerPage: 12, currentPage: p }">
         <!-- <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
         && (fam.$event.indexOf(this.filter.event)!=-1 || this.filter.event=='') 
         && (fam.$summary.indexOf(this.filter.contain)!=-1 || this.filter.contain=='')
@@ -117,6 +118,8 @@
           </div>
         </div>
       </ng-container>
+      <p class="card-text" ngNonBindable>{{ this.promise }}</p> 
+      <p class="card-text">{{ this.promise | async  }}</p> 
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 

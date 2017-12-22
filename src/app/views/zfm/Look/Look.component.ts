@@ -5,6 +5,9 @@ import {
   Output,
   Input
 } from '@angular/core';
+import { of } from "rxjs/observable/of";
+import { delay, share } from 'rxjs/operators';
+import {Observable,Subscriber } from 'rxjs';
 import {
   ZfmService
 } from '../../../services/zfm.service';
@@ -34,10 +37,16 @@ import {
   styleUrls: ['./Look.component.scss']
 })
 export class LookComponent extends BaseComponent implements OnInit {
-
   
 
   @Output() onCollapsed = new EventEmitter < boolean > ();
+  
+
+  
+  
+
+
+
   try: string = 'try';
   collapsed = false;
   p: number = 1;
@@ -46,17 +55,190 @@ export class LookComponent extends BaseComponent implements OnInit {
     event: '',
     contain: '',
     date: moment('01/01/0001', 'DD/MM/YYYY').toDate(),
-    date_month:false,
-    date_year:false,
+    date_month: false,
+    date_year: false,
     date_range: [moment('01/01/0001', 'DD/MM/YYYY').toDate(), moment('01/01/0001', 'DD/MM/YYYY').toDate()],
-    date_range_month:false,
-    date_range_year:false,
+    date_range_month: false,
+    date_range_year: false,
     place: '',
     timeLong: moment('00:00', 'hh:mm').toDate(),
     time1: moment('00:00', 'hh:mm').toDate(),
     time2: moment('00:00', 'hh:mm').toDate(),
     num: 0,
   };
+
+  private events:string='';
+  private contain:string='';
+  private place:string='';
+  private date:Date=moment('01/01/0001', 'DD/MM/YYYY').toDate();
+  private date_range:Date[]=[moment('01/01/0001', 'DD/MM/YYYY').toDate(), moment('01/01/0001', 'DD/MM/YYYY').toDate()];
+  private date_month:boolean=false;  
+  private date_year:boolean=false;  
+  private date_range_month:boolean=false;  
+  private date_range_year:boolean=false;
+  private timeLong:Date=moment('00:00', 'hh:mm').toDate();
+  private time1:Date=moment('00:00', 'hh:mm').toDate();
+  private time2:Date=moment('00:00', 'hh:mm').toDate();
+
+	public get $contain(): string {
+		return this.contain;
+	}
+
+	public set $contain(value: string) {
+    this.contain = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date_year(): boolean {
+		return this.date_year;
+	}
+
+	public set $date_year(value: boolean) {
+    this.date_year = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date_range_month(): boolean {
+		return this.date_range_month;
+	}
+
+	public set $date_range_month(value: boolean) {
+    this.date_range_month = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date_range_year(): boolean {
+		return this.date_range_year;
+	}
+
+	public set $date_range_year(value: boolean) {
+    this.date_range_year = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $time2(): Date {
+		return this.time2;
+	}
+
+	public set $time2(value: Date) {
+    this.time2 = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+
+	public get $local(): string  {
+		return this.local;
+	}
+
+	public set $local(value: string ) {
+		this.local = value;
+	}
+
+
+	public get $events(): string {
+		return this.events;
+	}
+
+	public set $events(value: string) {
+    this.events = value;
+    this.toShow=this.getAsyncData().pipe(share());
+    // console.log(this.events)
+	}
+	
+
+	public get $filter(): any  {
+		return this.filter;
+	}
+
+	public set $filter(value: any ) {
+		this.filter = value;
+	}
+
+	public get $place(): string {
+		return this.place;
+	}
+
+	public set $place(value: string) {
+    this.place = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date(): Date {
+		return this.date;
+	}
+
+	public set $date(value: Date) {
+    this.date = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date_range(): Date[] {
+		return this.date_range;
+	}
+
+	public set $date_range(value: Date[]) {
+    this.date_range = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $date_month(): boolean {
+		return this.date_month;
+	}
+
+	public set $date_month(value: boolean) {
+    this.date_month = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $timeLong(): Date {
+		return this.timeLong;
+	}
+
+	public set $timeLong(value: Date) {
+    this.timeLong = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $time1(): Date {
+		return this.time1;
+	}
+
+	public set $time1(value: Date) {
+    this.time1 = value;
+    this.toShow=this.getAsyncData().pipe(share());
+	}
+
+	public get $hideLook(): number[]  {
+		return this.hideLook;
+	}
+
+	public set $hideLook(value: number[] ) {
+    this.hideLook = value;
+    
+	}
+
+  public set $dateFilter(value: any) {
+    // this.dateObj = value;
+    this.filter.date = moment("" + value.date.day + "/" + value.date.month + "/" + value.date.year, "DD/MM/YYYY").toDate();
+  }
+
+  public toggleDateMonth() {
+    this.$date_month = !this.date_month;
+  }
+  public toggleDateYear() {
+    this.$date_year = !this.date_year;
+  }
+  public toggleDateRangeMonth() {
+    this.$date_range_month = !this.date_range_month;
+  }
+  public toggleDateRangeYear() {
+    this.$date_range_year = !this.date_range_year;
+  }
+
+
+
+  @Output() filterEmit = new EventEmitter<number>();
+
   myTime: Date = new Date();
   private hideLook: number[] = [];
   // private famToShow:Map<Fam,boolean>;
@@ -75,6 +257,7 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.collapsed = !this.collapsed;
     console.log("collapse");
   }
+  private promise: Promise<String>;
 
   constructor(zfm: ZfmService, base: BaseService) {
     super(zfm, base);
@@ -84,38 +267,40 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.dpConfig.dateInputFormat = "DD/MM/YYYY";
     this.dpConfig.maxDate = new Date();
     this.dpConfig.value = new Date();
+    // this.promise = this.getPromise();
   }
 
   ngOnInit() {
-    this.changeScreen("zfm/look");
+    this.changeScreen("zfm/look");  
+    this.toShow=this.getAsyncData().pipe(share());
     // moment.locale('fr');
   }
-
-
-  getToShow() {
+  toShow:Observable<Fam[]>;
+  getAsyncData() {
+    // Fake Slow Async Data
     this.hideLook = [];
     let ToShow: Fam[] = [];
     // console.log(moment(this.filter.date).format("YYYY-MM-DD"),moment(this.zfm.$fams[0].$date).format("YYYY-MM-DD"))
     for (var fam of this.zfm.$fams) {
       var ok = true;
-      
+
       if (this.filter.num != 0 && fam.$num != this.filter.num) {
         ok = false;
-      } else if (this.filter.event != '' && fam.$event.indexOf(this.filter.event) == -1) {
+      } else if (this.$events != '' && fam.$event.indexOf(this.$events) == -1) {
         ok = false;
-      } else if (this.filter.contain != '' && fam.$summary.indexOf(this.filter.contain) == -1 && fam.$fam.indexOf(this.filter.contain) == -1) {
+      } else if (this.$contain != '' && fam.$summary.indexOf(this.$contain) == -1 && fam.$fam.indexOf(this.$contain) == -1) {
         ok = false;
-      } else if (this.filter.place != '' && fam.$place.$place.indexOf(this.filter.place) == -1) {
+      } else if (this.$place != '' && fam.$place.$place.indexOf(this.$place) == -1) {
         ok = false;
-      } else if (moment(this.filter.time1).hour() > 0 || moment(this.filter.time1).minute()>0) {
-        if (moment(this.filter.time2).hour() > 0 || moment(this.filter.time2).minute() > 0) {
+      } else if (moment(this.$time1).hour() > 0 || moment(this.$time1).minute() > 0) {
+        if (moment(this.$time2).hour() > 0 || moment(this.$time2).minute() > 0) {
           var timeA = moment({
-            h: moment(this.filter.time1).hour(),
-            m: moment(this.filter.time1).minute()
+            h: moment(this.$time1).hour(),
+            m: moment(this.$time1).minute()
           });
           var timeB = moment({
-            h: moment(this.filter.time2).hour(),
-            m: moment(this.filter.time2).minute()
+            h: moment(this.$time2).hour(),
+            m: moment(this.$time2).minute()
           });
           var timeC = moment({
             h: moment(fam.$timeLong).hour(),
@@ -125,8 +310,8 @@ export class LookComponent extends BaseComponent implements OnInit {
             ok = false;
         } else {
           var timeA = moment({
-            h: moment(this.filter.time1).hour(),
-            m: moment(this.filter.time1).minute()
+            h: moment(this.$time1).hour(),
+            m: moment(this.$time1).minute()
           });
           var timeC = moment({
             h: moment(fam.$timeLong).hour(),
@@ -137,32 +322,98 @@ export class LookComponent extends BaseComponent implements OnInit {
           }
 
         }
-      } else if (moment(this.filter.date).year() > 10) {
-        if(this.filter.date_year ){
-          if(moment(this.filter.date).year()!=moment(fam.$date).year() || (this.filter.date_month && moment(this.filter.date).month()!=moment(fam.$date).month()))
-            ok=false
-        }
-        else if(!moment(this.filter.date).isSame(fam.$date))
+      } else if (moment(this.$date).year() > 10) {
+        if (this.date_year) {
+          if (moment(this.$date).year() != moment(fam.$date).year() || (this.$date_month && moment(this.$date).month() != moment(fam.$date).month()))
+            ok = false
+        } else if (!moment(this.$date).isSame(fam.$date))
           ok = false;
-      } else if (moment(this.filter.date_range[0]).year() > 10 && moment(this.filter.date_range[1]).year() > 10 
-        ) {
-          if(this.filter.date_range_year ){
-            if(moment(this.filter.date_range[0]).year()>moment(fam.$date).year() || (moment(this.filter.date_range[1]).year()<moment(fam.$date).year()
-               || (this.filter.date_range_month && (moment(this.filter.date_range[0]).month()>moment(fam.$date).month() || moment(this.filter.date_range[1]).month()<moment(fam.$date).month()))))
-              ok=false
-          }
-          else if(!moment(fam.$date).isBetween(this.filter.date_range[0], this.filter.date_range[1]))
-            ok = false;
-        // ok = false;
+      } else if (moment(this.$date_range[0]).year() > 10 && moment(this.$date_range[1]).year() > 10) {
+        if (this.$date_range_year) {
+          if (moment(this.$date_range[0]).year() > moment(fam.$date).year() || (moment(this.$date_range[1]).year() < moment(fam.$date).year() ||
+              (this.$date_range_month && (moment(this.$date_range[0]).month() > moment(fam.$date).month() || moment(this.$date_range[1]).month() < moment(fam.$date).month()))))
+            ok = false
+        } else if (!moment(fam.$date).isBetween(this.$date_range[0], this.$date_range[1]))
+          ok = false;
       }
-      // console.log(this.filter.Date)
+      // console.log(this.$Date)
       if (!ok) {
         this.hideLook.push(fam.$num);
       } else {
         ToShow.push(fam);
       }
     }
-    return ToShow;
+   return of(ToShow).pipe();
+ }
+
+  getToShow() {
+    this.hideLook = [];
+    let ToShow: Fam[] = [];
+    return this.getAsyncData().pipe(share());
+    // console.log(moment(this.filter.date).format("YYYY-MM-DD"),moment(this.zfm.$fams[0].$date).format("YYYY-MM-DD"))
+    // for (var fam of this.zfm.$fams) {
+    //   var ok = true;
+
+    //   if (this.filter.num != 0 && fam.$num != this.filter.num) {
+    //     ok = false;
+    //   } else if (this.filter.event != '' && fam.$event.indexOf(this.filter.event) == -1) {
+    //     ok = false;
+    //   } else if (this.filter.contain != '' && fam.$summary.indexOf(this.filter.contain) == -1 && fam.$fam.indexOf(this.filter.contain) == -1) {
+    //     ok = false;
+    //   } else if (this.filter.place != '' && fam.$place.$place.indexOf(this.filter.place) == -1) {
+    //     ok = false;
+    //   } else if (moment(this.filter.time1).hour() > 0 || moment(this.filter.time1).minute() > 0) {
+    //     if (moment(this.filter.time2).hour() > 0 || moment(this.filter.time2).minute() > 0) {
+    //       var timeA = moment({
+    //         h: moment(this.filter.time1).hour(),
+    //         m: moment(this.filter.time1).minute()
+    //       });
+    //       var timeB = moment({
+    //         h: moment(this.filter.time2).hour(),
+    //         m: moment(this.filter.time2).minute()
+    //       });
+    //       var timeC = moment({
+    //         h: moment(fam.$timeLong).hour(),
+    //         m: moment(fam.$timeLong).minute()
+    //       });
+    //       if (!timeC.isBetween(timeA, timeB))
+    //         ok = false;
+    //     } else {
+    //       var timeA = moment({
+    //         h: moment(this.filter.time1).hour(),
+    //         m: moment(this.filter.time1).minute()
+    //       });
+    //       var timeC = moment({
+    //         h: moment(fam.$timeLong).hour(),
+    //         m: moment(fam.$timeLong).minute()
+    //       });
+    //       if (!timeC.isSame(timeA)) {
+    //         ok = false
+    //       }
+
+    //     }
+    //   } else if (moment(this.filter.date).year() > 10) {
+    //     if (this.filter.date_year) {
+    //       if (moment(this.filter.date).year() != moment(fam.$date).year() || (this.filter.date_month && moment(this.filter.date).month() != moment(fam.$date).month()))
+    //         ok = false
+    //     } else if (!moment(this.filter.date).isSame(fam.$date))
+    //       ok = false;
+    //   } else if (moment(this.filter.date_range[0]).year() > 10 && moment(this.filter.date_range[1]).year() > 10) {
+    //     if (this.filter.date_range_year) {
+    //       if (moment(this.filter.date_range[0]).year() > moment(fam.$date).year() || (moment(this.filter.date_range[1]).year() < moment(fam.$date).year() ||
+    //           (this.filter.date_range_month && (moment(this.filter.date_range[0]).month() > moment(fam.$date).month() || moment(this.filter.date_range[1]).month() < moment(fam.$date).month()))))
+    //         ok = false
+    //     } else if (!moment(fam.$date).isBetween(this.filter.date_range[0], this.filter.date_range[1]))
+    //       ok = false;
+    //   }
+    //   // console.log(this.filter.Date)
+    //   if (!ok) {
+    //     this.hideLook.push(fam.$num);
+    //   } else {
+    //     ToShow.push(fam);
+    //   }
+    // }
+    // return ToShow;
     // return this.zfm.$fams; 
   }
 
@@ -180,23 +431,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   }
 
-  public set $dateFilter(value: any) {
-    // this.dateObj = value;
-    this.filter.date = moment("" + value.date.day + "/" + value.date.month + "/" + value.date.year, "DD/MM/YYYY").toDate();
-  }
-
-  public toggleDateMonth(){
-    this.filter.date_month=!this.filter.date_month;
-  }
-  public toggleDateYear(){
-    this.filter.date_year=!this.filter.date_year;
-  }
-  public toggleDateRangeMonth(){
-    this.filter.date_range_month=!this.filter.date_range_month;
-  }
-  public toggleDateRangeYear(){
-    this.filter.date_range_year=!this.filter.date_range_year;
-  }
+  
 
 
 }
