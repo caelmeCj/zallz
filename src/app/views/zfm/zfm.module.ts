@@ -12,11 +12,15 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {FroalaEditorModule,FroalaViewModule} from 'angular-froala-wysiwyg';
 import { DetailLookComponent } from './DetailLook/DetailLook.component';
 import { MyDatePickerModule} from 'mydatepicker';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+// import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
+import { LOCALE_ID } from '@angular/core';
+import 'moment/locale/fr';
 // import {TimePickerComponent} from "angular2-timepicker/timepicker-component";
 
-@NgModule({
+@NgModule( {
   imports: [
+      
     CommonModule,
     ZfmRoutingRoutes,
     BsDropdownModule,
@@ -24,17 +28,21 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     NgxPaginationModule,
     MyDatePickerModule,
     TimepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    
   ],
-  providers:[ZfmService],
+  providers:[ZfmService,{ provide: LOCALE_ID, useValue: "en-US" }],
   declarations: [ZfmComponent,
     LookComponent,
     FillComponent
 ,
     BaseComponent
 ,
-    DetailLookComponent
-]
+    DetailLookComponent,
+],
 })
-export class ZfmModule { }
+export class ZfmModule { 
+    
+}

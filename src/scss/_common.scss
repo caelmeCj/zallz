@@ -1,22 +1,31 @@
-.hideinputpicker{    
-    padding: 0 0.75rem;
-     input[ngtype="text"]{
-         display:none;
-     }
-     
-     
-     .mydp{
-         border:none;
-         .selbtngroup{
-            width:auto;
-        }
-        .btnpicker {
-            background:transparent;   
-            // height: ;    
-        }
-        .selectiongroup{
-            background:transparent;         
-        }
-     }
-    
- }
+.hideinputpicker {
+  padding: 0 0.75rem;
+  input[ngtype="text"] {
+    display: none;
+  }
+  .mydp {
+    border: none;
+    .selbtngroup {
+      width: auto;
+    }
+    .btnpicker {
+      background: transparent; // height: ;    
+    }
+    .selectiongroup {
+      background: transparent;
+    }
+  }
+}
+
+bs-datepicker-container {
+  .bs-datepicker {
+    z-index: 2;
+  }
+}
+
+bs-daterangepicker-container {
+  .bs-datepicker {
+    z-index: 2;
+    left: 50%;
+  }
+}

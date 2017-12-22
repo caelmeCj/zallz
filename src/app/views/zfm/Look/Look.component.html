@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <div class="row">
-    <div *ngIf="this.base.$isCollapsed" class="filter-part col-sm-12 col-lg-2">
+    <div *ngIf="this.base.$isCollapsed" class="filter-part col-sm-12 col-lg-3">
       <div class="card">
         <div class="card-header">
           Filter
@@ -27,7 +27,7 @@
                 </select>                
               </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
               <label for="">{{this.filter.date}} </label>
               <div class="input-group">
               <input type="text" [ngModel]="this.filter.date | date: 'dd/MM/yyyy'"  id="date-searchfield" name="date-searchfield" class="form-control" placeholder="Date">   
@@ -36,19 +36,42 @@
                 (ngModelChange)="this.$dateFilter=$event" [options]="this.myDatePickerOptions" required></my-date-picker></span>
                
               </div>
+            </div>-->
+            <div class="form-group">
+              <!--<label for="">Time long</label>-->
+              <div class="input-group">
+                <input placeholder="Datepicker" [bsConfig]="dpConfig" [(ngModel)]="this.filter.date" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
+                 <span class="input-group-addon" (click)="dp.toggle()" ><i class="fa fa-calendar"></i></span>
+              </div>
             </div>
+            <div class="form-group">
+              <!--<label for="">Time long</label>-->
+              <div class="input-group">
+                <input class="form-control" [bsConfig]="bsRangeConfig" #drp="bsDaterangepicker" [ngModelOptions]="{standalone: true}" bsDaterangepicker [(ngModel)]="this.filter.date_range">
+                 <span class="input-group-addon" (click)="drp.toggle()" ><i class="fa fa-calendar"></i>&nbsp;<i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+            
             <div class="form-group">
               <div class="input-group">
                 <input type="text" id="place-searchfield" name="place-searchfield" class="form-control" placeholder="Place">
                 <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
               </div>
             </div>
+            
+            <div class="form-group">
+              <!--<label for="">Time long</label>-->
+              <div class="input-group">
+                
+                <timepicker [(ngModel)]="this.filter.time1" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker [(ngModel)]="this.filter.time2" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <!--{{this.filter.time1 | date:'hh:mm'}}               -->
+              </div>
+            </div>
             <div class="form-group">
               <div class="input-group">
-                <timepicker [(ngModel)]="this.filter.timeLong" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
-                {{this.filter.timeLong | date:'hh:mm'}}
-                <!-- <input type="text" id="time-searchfield" name="time-searchfield" class="form-control" placeholder="TimeLong"> -->
-                <!-- <span class="input-group-addon"><i class="fa fa-asterisk"></i></span> -->
+                
+                <!--{{this.filter.time2 | date:'hh:mm'}}               -->
               </div>
             </div>
             <div class="form-group form-actions">
@@ -59,7 +82,7 @@
       </div>
 
     </div>
-    <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-10 row':'col-sm-12 col-lg-12 row'">
+    <div [ngClass]="this.base.$isCollapsed?'col-sm-12 col-lg-9 row':'col-sm-12 col-lg-12 row'">
       <ng-container *ngFor="let fam of this.getToShow() | paginate: { itemsPerPage: 12, currentPage: p }">
         <!-- <div *ngIf="(fam.$num==this.filter.num || this.filter.num==0) 
         && (fam.$event.indexOf(this.filter.event)!=-1 || this.filter.event=='') 
