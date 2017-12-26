@@ -253,9 +253,6 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.dpConfig.value = new Date();
 
   }
-
-
-
   ngOnInit() {
     this.changeScreen("zfm/look");
     this.zfm.getAllFams().subscribe(res=>{
@@ -345,9 +342,13 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.changeScreen('zfm/look/detail');
   }
 
-
-
-
-
+  addNewFam(){
+    let fam=new Fam();
+    this.zfm.$fams.push(fam);
+    this.zfm.$selectedFam=fam;
+    fam.$event="sab";this.refreshShow();
+    console.log(this.zfm.$fams.length)
+    // this.changeScreen('zfm/look/detail');
+  }
 }
 

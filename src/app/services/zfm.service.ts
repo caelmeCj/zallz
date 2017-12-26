@@ -99,7 +99,7 @@ export class ZfmService {
   }
 
   getAllFams():Observable<Fam[]>{
-    return this._http.get("http://localhost:5000/fam")
+    return this._http.get(this.baseUrl+"/fam")
     .map( (responseData) => {
       // console.log( responseData.json())
       return responseData.json()[1].data;
@@ -111,10 +111,14 @@ export class ZfmService {
           f.fillFromObj(fam);
           result.push(f);
         });
-        // console.log(result)
       }
       return result;
     });
+  }
+
+  postFam(model:any){
+    return this._http.post(this.baseUrl+"/fam",model)
+    .map(res=>res.json());
   }
 
 

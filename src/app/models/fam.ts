@@ -2,15 +2,16 @@ import {Place} from './place';
 import {Base} from './base';
 import * as moment from 'moment';
 export class Fam extends Base{
-    private num:number;
-    private fam:String;
-    private summary:String;
-    private event:String;
+    private num:number=0;
+    private fam:String="";
+    private summary:String="";
+    private event:String="";
     private date:Date;
 	private dateString:String;
     private place:Place;
     private timeLong:Date;
 	private dateObj:any;
+	private status:String="saved";
 
     // constructor(){}
 
@@ -18,6 +19,16 @@ export class Fam extends Base{
 	constructor() {
         super();
 	}
+
+
+	public get $status(): String {
+		return this.status;
+	}
+
+	public set $status(value: String) {
+		this.status = value;
+	}
+	
     
 	public get $place(): Place {
 		return this.place;
