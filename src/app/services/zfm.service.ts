@@ -42,9 +42,9 @@ export class ZfmService {
   constructor(private _http:Http,private restangular: Restangular) {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
-    this.famNumberChange$=Observable.of(0);
-    this.fillTempData();
-    // this.getAll();
+    // this.famNumberChange$=Observable.of(0);
+    // this.fillTempData();
+    this.getAll();
     // console.log(this.restangular.all('fam'))
     // let baseFams$ = this.baseFam.getList().subscribe(fams => {
     //   this.fams = fams[1].data;
@@ -89,10 +89,20 @@ export class ZfmService {
     }
   }
 
-  getAll():Observable<Fam[]> {
+  getAll() {
     // let arr=this.baseFam.map(fams=>fams[1].data);
-    return this.baseFam.map(fams=>fams[1].data);
+    // return this.baseFam.map(fams=>fams[1].data).map((fams:Array<any>)=>{
+      // let result:Array<Fam>=[];
+      // if(fams){
+      //   fams.forEach((fam)=>{
+      //     let f=new Fam();
+      //     f.fillFromObj(fam);
+      //     result.push(f);
+      //   })
+      // }
+    // }).getList();
     // console.log()
+    return this.baseFam.getList();
   }
 
   getAllFams():Observable<Fam[]>{

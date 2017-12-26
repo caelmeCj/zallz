@@ -263,10 +263,21 @@ export class LookComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.changeScreen("zfm/look");
     // this.toShow = this.getAsyncData().pipe(share());
-    this.zfm.getAllFams().subscribe(fams=>{
-      this.toShow=this.getAsyncData(fams).pipe(share());
+    this.zfm.getAll().subscribe(fams=>{
+      this.toShow=this.getAsyncData(fams[1].data.map(
+        (fams:Array<any>)=>{
+          let result:Array<Fam>=[];
+          if(fams){
+            fams.forEach((fam)=>{
+              let f=new Fam();
+              f.fillFromObj(fam);
+              result.push(f);
+            })
+          }
+        }
+      )).pipe(share());
       console.log(fams);
-      this.toRender=fams;
+      this.toRender=<Array<Fam>>fams;
       console.log(this.toRender[1].$event)
     })
     // moment.locale('fr');
