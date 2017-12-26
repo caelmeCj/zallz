@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {BaseComponent} from '../base/base.component';
 import {ZfmService} from '../../../services/zfm.service';
 import {BaseService} from '../../../services/base.service';
-import {IMyDpOptions} from 'mydatepicker';
+// import {IMyDpOptions} from 'mydatepicker';
+import {
+  BsDatepickerConfig
+} from 'ngx-bootstrap/datepicker';
 import * as moment from 'moment';
 @Component({
   selector: 'app-DetailLook',

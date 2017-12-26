@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { HttpModule }    from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 
 import {BaseService} from './services/base.service';
 import {A2Edatetimepicker} from 'ng2-eonasdan-datetimepicker';
-// import {ZfmService} from './services/zfm.service';
+import {WebApiObservableService} from './services/web-api-observable.service';
 
 // Import containers
 import {
@@ -69,9 +70,17 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+
+
+export function RestangularConfigFactory (RestangularProvider) {
+  RestangularProvider.setBaseUrl('http://localhost:5000');
+  RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'});
+}
 
 @NgModule({
   imports: [
+    HttpModule,
     BrowserModule,
     CommonModule,
     AppRoutingModule,
@@ -79,6 +88,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     TabsModule.forRoot(),
     ChartsModule,
     A2Edatetimepicker,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   declarations: [
     AppComponent,
@@ -90,7 +100,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
-  BaseService
+  BaseService,
+  WebApiObservableService
 ],
   bootstrap: [ AppComponent ]
 })

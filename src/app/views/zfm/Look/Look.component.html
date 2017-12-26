@@ -68,8 +68,8 @@
               <!--<label for="">Time long</label>-->
               <div class="input-group">
                 
-                <timepicker [ngModel]="this.time1" (ngModelChange)="this.$time1=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
-                <timepicker [ngModel]="this.time2" (ngModelChange)="this.$time2=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker class="hide-arrow" [ngModel]="this.time1" (ngModelChange)="this.$time1=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker class="hide-arrow" [ngModel]="this.time2" (ngModelChange)="this.$time2=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
                 <!--{{this.filter.time1 | date:'hh:mm'}}               -->
               </div>
             </div>

@@ -5,4 +5,10 @@ export class Base {
             this[propName] = jsonObj[propName]
         }
     }
+    fillFromObj(obj:any){
+        for (var propName in obj) {
+            // console.log(propName,obj[propName]);
+            this[propName] = obj[propName];
+        }
+    }
 }

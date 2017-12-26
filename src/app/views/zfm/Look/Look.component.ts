@@ -88,7 +88,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $contain(value: string) {
     this.contain = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date_year(): boolean {
@@ -97,7 +97,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date_year(value: boolean) {
     this.date_year = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date_range_month(): boolean {
@@ -106,7 +106,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date_range_month(value: boolean) {
     this.date_range_month = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date_range_year(): boolean {
@@ -115,7 +115,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date_range_year(value: boolean) {
     this.date_range_year = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $time2(): Date {
@@ -124,7 +124,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $time2(value: Date) {
     this.time2 = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
 
@@ -143,7 +143,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $events(value: string) {
     this.events = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
     // console.log(this.events)
   }
 
@@ -162,7 +162,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $place(value: string) {
     this.place = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date(): Date {
@@ -171,7 +171,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date(value: Date) {
     this.date = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date_range(): Date[] {
@@ -180,7 +180,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date_range(value: Date[]) {
     this.date_range = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $date_month(): boolean {
@@ -189,7 +189,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $date_month(value: boolean) {
     this.date_month = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $timeLong(): Date {
@@ -198,7 +198,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $timeLong(value: Date) {
     this.timeLong = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
   public get $time1(): Date {
@@ -207,7 +207,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   public set $time1(value: Date) {
     this.time1 = value;
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
   }
 
 
@@ -253,21 +253,32 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.dpConfig.dateInputFormat = "DD/MM/YYYY";
     this.dpConfig.maxDate = new Date();
     this.dpConfig.value = new Date();
+
+    // this.zfm.$famNumberChange$.subscribe((newNumber:Number)=>{this.toShow = this.getAsyncData().pipe(share());})
     // this.promise = this.getPromise();
   }
 
+
+
   ngOnInit() {
     this.changeScreen("zfm/look");
-    this.toShow = this.getAsyncData().pipe(share());
+    // this.toShow = this.getAsyncData().pipe(share());
+    this.zfm.getAllFams().subscribe(fams=>{
+      this.toShow=this.getAsyncData(fams).pipe(share());
+      console.log(fams);
+      this.toRender=fams;
+      console.log(this.toRender[1].$event)
+    })
     // moment.locale('fr');
   }
+  toRender:Fam[];
   toShow: Observable < Fam[] > ;
-  getAsyncData() {
+  getAsyncData(fams:Fam[]) {
     // Fake Slow Async Data
 
     let ToShow: Fam[] = [];
     // console.log(moment(this.filter.date).format("YYYY-MM-DD"),moment(this.zfm.$fams[0].$date).format("YYYY-MM-DD"))
-    for (var fam of this.zfm.$fams) {
+    for (var fam of fams) {
       var ok = true;
 
       if (this.filter.num != 0 && fam.$num != this.filter.num) {

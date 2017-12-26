@@ -41,16 +41,17 @@
               <!--<input class="form-control" type="" moment-picker="this.zfm.$selectedFam.$date"
                name="" [ngModel]="this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy'" 
                (ngModelChange)="this.zfm.$selectedFam.$dateString=$event" >-->
-               <my-date-picker name="mydate" [ngModel]="this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy'" 
-               (ngModelChange)="this.zfm.$selectedFam.$dateObj=$event" [options]="myDatePickerOptions" required> </my-date-picker>
+               <input placeholder="Datepicker" [bsConfig]="dpConfig" [ngModel]="this.zfm.$selectedFam.$date" (ngModelChange)="this.$date=$event" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
             </div>
             <div class="form-group col-sm-3">
               <label for="">Place</label>
               <input class="form-control" type="" name="" disabled [(ngModel)]="this.zfm.$selectedFam.$place.$place">
+              
             </div>
             <div class="form-group col-sm-3">
               <label for="">Duration</label>
-              <input class="form-control" type="" name="" [(ngModel)]="this.zfm.$selectedFam.$timeLong" >
+              <!--<input class="form-control" type="" name="" [(ngModel)]="this.zfm.$selectedFam.$timeLong" >-->
+              <timepicker class="hide-arrow" [ngModel]="this.zfm.$selectedFam.$timeLong" (ngModelChange)="this.zfm.$selectedFam.$timeLong=$event" [showMeridian]="false"  [ngModelOptions]="{standalone: true}"></timepicker>
               <!--<owl-date-time ></owl-date-time>-->
             </div>
           </div>
