@@ -17,7 +17,7 @@ import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
 import { LOCALE_ID } from '@angular/core';
 import 'moment/locale/fr';
 // import {TimePickerComponent} from "angular2-timepicker/timepicker-component";
-
+import { AgmCoreModule } from '@agm/core';
 @NgModule( {
   imports: [
       
@@ -31,7 +31,9 @@ import 'moment/locale/fr';
     BsDatepickerModule.forRoot(),
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    
+    AgmCoreModule.forRoot({
+        apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+      })
   ],
   providers:[ZfmService,{ provide: LOCALE_ID, useValue: "en-US" }],
   declarations: [ZfmComponent,

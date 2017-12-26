@@ -43,8 +43,8 @@ export class ZfmService {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
     this.famNumberChange$=Observable.of(0);
-    // this.fillTempData();
-    this.getAll();
+    this.fillTempData();
+    // this.getAll();
     // console.log(this.restangular.all('fam'))
     // let baseFams$ = this.baseFam.getList().subscribe(fams => {
     //   this.fams = fams[1].data;

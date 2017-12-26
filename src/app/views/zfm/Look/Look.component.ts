@@ -281,6 +281,8 @@ export class LookComponent extends BaseComponent implements OnInit {
     for (var fam of fams) {
       var ok = true;
 
+      
+
       if (this.filter.num != 0 && fam.$num != this.filter.num) {
         ok = false;
       } else if (this.$events != '' && fam.$event.indexOf(this.$events) == -1) {
