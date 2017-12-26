@@ -3,7 +3,8 @@ import {
   OnInit,
   EventEmitter,
   Output,
-  Input
+  Input,
+  OnChanges, SimpleChanges
 } from '@angular/core';
 import { of
 } from "rxjs/observable/of";
@@ -38,6 +39,8 @@ import {
 import {
   fr
 } from 'ngx-bootstrap/locale';
+import {Subject} from 'rxjs/Rx';
+// import {FilterByPipe} from 'ngx-pipes';
 @Component({
   selector: 'app-Look',
   templateUrl: './Look.component.html',
@@ -53,7 +56,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   collapsed = false;
   p: number = 1;
   private local: string = "fr";
-  private filter: any = {
+  @Input() private filter: any = {
     event: '',
     contain: '',
     date: moment('01/01/0001', 'DD/MM/YYYY').toDate(),
@@ -68,8 +71,9 @@ export class LookComponent extends BaseComponent implements OnInit {
     time2: moment('00:00', 'hh:mm').toDate(),
     num: 0,
   };
+  
 
-  private events: string = '';
+  @Input() private events: string = '';
   private contain: string = '';
   private place: string = '';
   private date: Date = moment('01/01/0001', 'DD/MM/YYYY').toDate();
@@ -81,14 +85,20 @@ export class LookComponent extends BaseComponent implements OnInit {
   private timeLong: Date = moment('00:00', 'hh:mm').toDate();
   private time1: Date = moment('00:00', 'hh:mm').toDate();
   private time2: Date = moment('00:00', 'hh:mm').toDate();
-
+  refreshShow(){
+    this.zfm.getAllFams().subscribe(res=>{
+      this.toShow=this.getAsyncData(res).pipe(share());
+    });
+  }
   public get $contain(): string {
     return this.contain;
   }
 
+  
+
   public set $contain(value: string) {
     this.contain = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.refreshShow();
   }
 
   public get $date_year(): boolean {
@@ -96,8 +106,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date_year(value: boolean) {
-    this.date_year = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date_year = value;this.refreshShow();
   }
 
   public get $date_range_month(): boolean {
@@ -105,8 +114,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date_range_month(value: boolean) {
-    this.date_range_month = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date_range_month = value;this.refreshShow();
   }
 
   public get $date_range_year(): boolean {
@@ -114,8 +122,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date_range_year(value: boolean) {
-    this.date_range_year = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date_range_year = value;this.refreshShow();
   }
 
   public get $time2(): Date {
@@ -123,8 +130,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $time2(value: Date) {
-    this.time2 = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.time2 = value;this.refreshShow();
   }
 
 
@@ -142,9 +148,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $events(value: string) {
-    this.events = value;
-    // this.toShow = this.getAsyncData().pipe(share());
-    // console.log(this.events)
+    this.events = value;this.refreshShow();
   }
 
 
@@ -161,8 +165,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $place(value: string) {
-    this.place = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.place = value;this.refreshShow();
   }
 
   public get $date(): Date {
@@ -170,8 +173,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date(value: Date) {
-    this.date = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date = value;this.refreshShow();
   }
 
   public get $date_range(): Date[] {
@@ -179,8 +181,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date_range(value: Date[]) {
-    this.date_range = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date_range = value;this.refreshShow();
   }
 
   public get $date_month(): boolean {
@@ -188,8 +189,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $date_month(value: boolean) {
-    this.date_month = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.date_month = value;this.refreshShow();
   }
 
   public get $timeLong(): Date {
@@ -197,8 +197,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $timeLong(value: Date) {
-    this.timeLong = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.timeLong = value;this.refreshShow();
   }
 
   public get $time1(): Date {
@@ -206,23 +205,22 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
 
   public set $time1(value: Date) {
-    this.time1 = value;
-    // this.toShow = this.getAsyncData().pipe(share());
+    this.time1 = value;this.refreshShow();
   }
 
 
 
   public toggleDateMonth() {
-    this.$date_month = !this.date_month;
+    this.$date_month = !this.date_month;this.refreshShow();
   }
   public toggleDateYear() {
-    this.$date_year = !this.date_year;
+    this.$date_year = !this.date_year;this.refreshShow();
   }
   public toggleDateRangeMonth() {
-    this.$date_range_month = !this.date_range_month;
+    this.$date_range_month = !this.date_range_month;this.refreshShow();
   }
   public toggleDateRangeYear() {
-    this.$date_range_year = !this.date_range_year;
+    this.$date_range_year = !this.date_range_year;this.refreshShow();
   }
 
 
@@ -254,34 +252,18 @@ export class LookComponent extends BaseComponent implements OnInit {
     this.dpConfig.maxDate = new Date();
     this.dpConfig.value = new Date();
 
-    // this.zfm.$famNumberChange$.subscribe((newNumber:Number)=>{this.toShow = this.getAsyncData().pipe(share());})
-    // this.promise = this.getPromise();
   }
 
 
 
   ngOnInit() {
     this.changeScreen("zfm/look");
-    // this.toShow = this.getAsyncData().pipe(share());
-    this.zfm.getAll().subscribe(fams=>{
-      this.toShow=this.getAsyncData(fams[1].data.map(
-        (fams:Array<any>)=>{
-          let result:Array<Fam>=[];
-          if(fams){
-            fams.forEach((fam)=>{
-              let f=new Fam();
-              f.fillFromObj(fam);
-              result.push(f);
-            })
-          }
-        }
-      )).pipe(share());
-      console.log(fams);
-      this.toRender=<Array<Fam>>fams;
-      console.log(this.toRender[1].$event)
-    })
-    // moment.locale('fr');
+    this.zfm.getAllFams().subscribe(res=>{
+      this.toShow=this.getAsyncData(res).pipe(share());
+    });
   }
+
+
   toRender:Fam[];
   toShow: Observable < Fam[] > ;
   getAsyncData(fams:Fam[]) {
@@ -353,6 +335,7 @@ export class LookComponent extends BaseComponent implements OnInit {
         ToShow.push(fam);
       }
     }
+    
     return of(ToShow).pipe();
   }
 

@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import {BaseService} from './services/base.service';
 import {A2Edatetimepicker} from 'ng2-eonasdan-datetimepicker';
 import {WebApiObservableService} from './services/web-api-observable.service';
-
+import {NgPipesModule} from 'ngx-pipes';
 // Import containers
 import {
   FullLayoutComponent,
@@ -80,7 +80,7 @@ export function RestangularConfigFactory (RestangularProvider) {
 
 @NgModule({
   imports: [
-    HttpModule,
+    HttpModule,NgPipesModule,
     BrowserModule,
     CommonModule,
     AppRoutingModule,

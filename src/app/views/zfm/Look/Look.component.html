@@ -96,7 +96,7 @@
         && (fam.$place.$place.indexOf(this.filter.place)!=-1 || this.filter.place=='' )
         && (fam.$timeLong.indexOf(this.filter.timeLong)!=-1 || this.filter.timeLong=='' ) " class="col-sm-6 col-lg-3"> -->
         <div class="col-sm-6 col-lg-3">
-          <div class="card {{fam.$event=='new_moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='passover'?'text-white bg-danger':(fam.$event=='pentekost'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
+          <div class="card {{fam.$event=='moon'?'':(fam.$event=='sab'?'text-white bg-primary':(fam.$event=='paska'?'text-white bg-danger':(fam.$event=='pentek'?'text-white bg-warning':(fam.$event=='feast'?'text-white bg-info':'text-white bg-other'))))}}">
             <div class="card-body pb-0">
               <div class="btn-group float-right" dropdown>
                 <button type="button" class="btn btn-transparent dropdown-toggle p-0 black" dropdownToggle>

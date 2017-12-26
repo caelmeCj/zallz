@@ -42,16 +42,8 @@ export class ZfmService {
   constructor(private _http:Http,private restangular: Restangular) {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
-    // this.famNumberChange$=Observable.of(0);
-    // this.fillTempData();
     this.getAll();
-    // console.log(this.restangular.all('fam'))
-    // let baseFams$ = this.baseFam.getList().subscribe(fams => {
-    //   this.fams = fams[1].data;
-    //   console.log(this.fams);
-    // });
-    // console.log("---" + this.restangular.allUrl('googlers', 'http://localhost:5000/fam').getList());
-    // console.log("----"+this.fams );
+
   }
 
 
@@ -90,24 +82,39 @@ export class ZfmService {
   }
 
   getAll() {
-    // let arr=this.baseFam.map(fams=>fams[1].data);
-    // return this.baseFam.map(fams=>fams[1].data).map((fams:Array<any>)=>{
-      // let result:Array<Fam>=[];
-      // if(fams){
-      //   fams.forEach((fam)=>{
-      //     let f=new Fam();
-      //     f.fillFromObj(fam);
-      //     result.push(f);
-      //   })
-      // }
-    // }).getList();
-    // console.log()
-    return this.baseFam.getList();
+
+    return Observable.from(this.baseFam.map(fams=>fams[1].data).map((fams:Array<any>)=>{
+      let result:Array<Fam>=[];
+      fams.forEach((fam)=>{
+        let f=new Fam();
+        f.fillFromObj(fam);
+        console.log("---"+f);
+        result.push(f);
+      });
+      
+      return result;
+      
+    }));
+
   }
 
   getAllFams():Observable<Fam[]>{
     return this._http.get("http://localhost:5000/fam")
-      .map(res => res.json()[1].data);
+    .map( (responseData) => {
+      // console.log( responseData.json())
+      return responseData.json()[1].data;
+    }).map((fams: Array<any>) => {
+      let result:Array<Fam> = [];
+      if (fams) {
+        fams.forEach((fam) => {
+          let f=new Fam();
+          f.fillFromObj(fam);
+          result.push(f);
+        });
+        // console.log(result)
+      }
+      return result;
+    });
   }
 
 
