@@ -8,10 +8,11 @@ export class Fam extends Base{
     private event:String="";
     private date:Date;
 	private dateString:String;
-    private place:Place;
+	private placeClass:Place;
+	private place:number=0;
     private timeLong:Date;
 	private dateObj:any;
-	private status:String="saved";
+	
 
     // constructor(){}
 
@@ -21,22 +22,26 @@ export class Fam extends Base{
 	}
 
 
-	public get $status(): String {
-		return this.status;
-	}
 
-	public set $status(value: String) {
-		this.status = value;
-	}
 	
     
-	public get $place(): Place {
+
+	public get $placeClass(): Place {
+		return this.placeClass;
+	}
+
+	public set $placeClass(value: Place) {
+		this.placeClass = value;
+	}
+
+	public get $place(): number {
 		return this.place;
 	}
 
-	public set $place(value: Place) {
+	public set $place(value: number) {
 		this.place = value;
 	}
+	
 
 	public get $num(): number {
 		return this.num;

@@ -36,16 +36,34 @@ export class ZfmService {
   private allFams: Observable < Fam[] > ;
   private baseFam = this.restangular.all('fam');
   private subFams:Subject<Fam[]>;
-  private behavFams:Subject<Array<Fam>>=new BehaviorSubject<Array<Fam>>([]);
+  private behavFams:BehaviorSubject<Array<Fam>>=new BehaviorSubject<Array<Fam>>([]);
+  private behavPlace:BehaviorSubject<Array<Place>>=new BehaviorSubject<Array<Place>>([]);
 
   constructor(private _http:Http,private restangular: Restangular) {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
+    let incognito=new Place();
+    incognito.$num=0;
+    incognito.$displayName="Inconnu";
+    this.behavPlace.next(this.behavPlace.getValue().concat(incognito));
+    this.getAllPlaces().subscribe(res=>{
+      this.behavPlace.next(this.behavPlace.getValue().concat(res));
+    });
+
     this.getAllFams().subscribe(res=>{
       this.behavFams.next(res);
     });
-    this.getAllFams();
-    this.refreshFams();
+    
+
+
+
+
+
+    
+    
+    // this.getAllFams();
+    // this.refreshFams();
+    
   }
 
   
@@ -66,7 +84,7 @@ export class ZfmService {
         }
       };
       fam.$event = "new_moon";
-      fam.$place = place;
+      // fam.$place = place;
       place.$place = "cite_itaosy"
       fam.$timeLong = new Date();
       if (i == 2) fam.$event = "sab";
@@ -103,14 +121,45 @@ export class ZfmService {
         fams.forEach((fam) => {
           let f=new Fam();
           f.fillFromObj(fam);
+          f.$status="saved";
           result.push(f);
           
         });
       }
       this.behavFams.next(result);
-      // console.log(fams+"---"+this.behavFams);
       return result;
     });
+  }
+  getAllPlaces(){
+    // console.log("jklm")
+    
+    // this.behavPlace.next(this.behavPlace.getValue().concat(incognito));
+    return this._http.get(this.baseUrl+"/places")
+    .map( (responseData) => {
+      // console.log( responseData.json())
+      return responseData.json()[1].data;
+    }).map((fams: Array<any>) => {
+      let result:Array<Place> = [];
+      if (fams) {
+        fams.forEach((fam) => {
+          let f=new Place();
+          f.fillFromObj(fam);
+          f.$status="saved";
+          result.push(f);
+          
+        });
+      }
+      // this.behavPlace.next(result);
+      return result;
+    });
+    
+  }
+  getPlaceById(id:number){  
+    for(let place of this.$behavPlace.getValue()){
+      if(place.$num==id){
+        return place;
+      }
+    }
   }
 
   
@@ -171,6 +220,14 @@ export class ZfmService {
   }
 
 
+	public get $behavPlace(): BehaviorSubject<Array<Place>> {
+		return this.behavPlace;
+	}
+
+	public set $behavPlace(value: BehaviorSubject<Array<Place>>) {
+		this.behavPlace = value;
+	}
+
 
   public myData() {
     return 'This is my data, man!';
@@ -204,12 +261,14 @@ export class ZfmService {
   
 
 
-	public get $behavFams(): Subject<Array<Fam>> {
+
+	public get $behavFams(): BehaviorSubject<Array<Fam>> {
 		return this.behavFams;
 	}
 
-	public set $behavFams(value: Subject<Array<Fam>>) {
+	public set $behavFams(value: BehaviorSubject<Array<Fam>>) {
 		this.behavFams = value;
 	}
+	
 
 }

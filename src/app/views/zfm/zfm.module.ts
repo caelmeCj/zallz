@@ -18,6 +18,7 @@ import { LOCALE_ID } from '@angular/core';
 import 'moment/locale/fr';
 // import {TimePickerComponent} from "angular2-timepicker/timepicker-component";
 import { AgmCoreModule } from '@agm/core';
+import {PlacePipePipe} from '../../pipes/PlacePipe.pipe';
 @NgModule( {
   imports: [
       
@@ -36,7 +37,7 @@ import { AgmCoreModule } from '@agm/core';
       })
   ],
   providers:[ZfmService,{ provide: LOCALE_ID, useValue: "en-US" }],
-  declarations: [ZfmComponent,
+  declarations: [ZfmComponent,PlacePipePipe,
     LookComponent,
     FillComponent
 ,

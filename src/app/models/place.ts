@@ -1,4 +1,6 @@
-export class Place {
+import {Base} from './base';
+
+export class Place extends Base{
 	private num:number;
     private place:String;
     private lat:number;
@@ -14,7 +16,7 @@ export class Place {
 
 
 	constructor() {
-       
+       super();
 	}
     
 
