@@ -36,39 +36,18 @@ export class ZfmService {
   private allFams: Observable < Fam[] > ;
   private baseFam = this.restangular.all('fam');
   private subFams:Subject<Fam[]>;
+  private behavFams:Subject<Array<Fam>>=new BehaviorSubject<Array<Fam>>([]);
 
   constructor(private _http:Http,private restangular: Restangular) {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
-    this.getAll();
+    this.getAllFams().subscribe(res=>{
+      this.behavFams.next(res);
+    });
+    this.getAllFams();
     this.refreshFams();
   }
 
-	public get $subFams(): Subject<Fam[]> {
-		return this.subFams;
-	}
-
-	public set $subFams(value: Subject<Fam[]>) {
-		this.subFams = value;
-	}
-
-
-	public get $allFams(): Observable < Fam[] >  {
-		return this.allFams;
-	}
-
-	public set $allFams(value: Observable < Fam[] > ) {
-		this.allFams = value;
-	}
-
-
-	public get $famNumberChange$(): Observable<Number> {
-		return this.famNumberChange$;
-	}
-
-	public set $famNumberChange$(value: Observable<Number>) {
-		this.famNumberChange$ = value;
-	}
   
 
   public fillTempData() {
@@ -112,7 +91,8 @@ export class ZfmService {
 
   }
 
-  getAllFams():Observable<Fam[]>{
+  getAllFams(){
+    // console.log("jklm")
     return this._http.get(this.baseUrl+"/fam")
     .map( (responseData) => {
       // console.log( responseData.json())
@@ -124,16 +104,21 @@ export class ZfmService {
           let f=new Fam();
           f.fillFromObj(fam);
           result.push(f);
+          
         });
       }
+      this.behavFams.next(result);
+      // console.log(fams+"---"+this.behavFams);
       return result;
     });
   }
 
+  
+
   refreshFams(){
     // this.allFams=this.getAllFams();
     // this.allFams.combineLatest(this.getAllFams());
-    this.subFams.combineLatest(this.getAllFams());
+    // this.subFams.combineLatest(this.getAllFams());
     // this.subFams=this.getAllFams();
     // this.subFams.
   }
@@ -190,4 +175,41 @@ export class ZfmService {
   public myData() {
     return 'This is my data, man!';
   }
+  
+	public get $subFams(): Subject<Fam[]> {
+		return this.subFams;
+	}
+
+	public set $subFams(value: Subject<Fam[]>) {
+		this.subFams = value;
+	}
+
+
+	public get $allFams(): Observable < Fam[] >  {
+		return this.allFams;
+	}
+
+	public set $allFams(value: Observable < Fam[] > ) {
+		this.allFams = value;
+	}
+
+
+	public get $famNumberChange$(): Observable<Number> {
+		return this.famNumberChange$;
+	}
+
+	public set $famNumberChange$(value: Observable<Number>) {
+		this.famNumberChange$ = value;
+	}
+  
+
+
+	public get $behavFams(): Subject<Array<Fam>> {
+		return this.behavFams;
+	}
+
+	public set $behavFams(value: Subject<Array<Fam>>) {
+		this.behavFams = value;
+	}
+
 }
