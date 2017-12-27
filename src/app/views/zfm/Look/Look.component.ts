@@ -256,7 +256,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
   ngOnInit() {
     this.changeScreen("zfm/look");
-    this.zfm.behavFams.subscribe(res=>{
+    this.zfm.$behavFams.subscribe(res=>{
       this.toShow=this.getAsyncData(res).pipe(share());
     });
   }
