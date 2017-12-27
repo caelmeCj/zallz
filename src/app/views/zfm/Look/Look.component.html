@@ -114,9 +114,9 @@
               <p>{{fam.$date | date: 'dd/MM/yyyy'}} </p>
               <!--<p (click)="this.changeCollapse()">{{this.base.$isCollapsed?'col-sm-12 col-lg-9 row':'col-sm-12 col-lg-12 '}} </p>-->
             </div>
-            <div class="chart-wrapper px-3" style="height:40px;">
-              <p>{{fam.$place}}</p>
-              <p>{{fam.$timeLong}}</p>
+            <div class="chart-wrapper px-3" style="height:auto;">
+              <p>{{fam.$place | placepipe:'$displayName'}}
+              | {{fam.$timeLong | date:'hh:mm'}}</p>
             </div>
           </div>
         </div>

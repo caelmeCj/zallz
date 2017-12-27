@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import {BaseService} from './services/base.service';
 import {A2Edatetimepicker} from 'ng2-eonasdan-datetimepicker';
 import {WebApiObservableService} from './services/web-api-observable.service';
-// import {NgPipesModule} from 'ngx-pipes';
+import {PlacePipePipe} from './pipes/PlacePipe.pipe';
 // Import containers
 import {
   FullLayoutComponent,
@@ -88,13 +88,15 @@ export function RestangularConfigFactory (RestangularProvider) {
     TabsModule.forRoot(),
     ChartsModule,
     A2Edatetimepicker,
-    RestangularModule.forRoot(RestangularConfigFactory)
+    RestangularModule.forRoot(RestangularConfigFactory),
+
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
+    
   ],
   providers: [{
     provide: LocationStrategy,

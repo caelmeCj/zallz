@@ -41,11 +41,11 @@
               <!--<input class="form-control" type="" moment-picker="this.zfm.$selectedFam.$date"
                name="" [ngModel]="this.zfm.$selectedFam.$date | date: 'dd/MM/yyyy'" 
                (ngModelChange)="this.zfm.$selectedFam.$dateString=$event" >-->
-               <input placeholder="Datepicker" [bsConfig]="dpConfig" [ngModel]="this.zfm.$selectedFam.$date" (ngModelChange)="this.$date=$event" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
+               <input placeholder="Datepicker" [bsConfig]="dpConfig" [ngModel]="this.zfm.$selectedFam.$date" (ngModelChange)="this.zfm.$selectedFam.$date=$event" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
             </div>
             <div class="form-group col-sm-3">
               <label for="">Place</label>
-              <input class="form-control" type="" name="" disabled [(ngModel)]="this.zfm.$selectedFam.$place.$place">
+              <input class="form-control" type="" name="" disabled [ngModel]="this.zfm.$selectedFam.$place | placepipe:'$displayName'" >
               
             </div>
             <div class="form-group col-sm-3">
