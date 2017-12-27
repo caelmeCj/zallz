@@ -86,7 +86,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   private time1: Date = moment('00:00', 'hh:mm').toDate();
   private time2: Date = moment('00:00', 'hh:mm').toDate();
   refreshShow(){
-    this.zfm.getAllFams().subscribe(res=>{
+    this.zfm.$allFams.subscribe(res=>{
       this.toShow=this.getAsyncData(res).pipe(share());
     });
   }
@@ -255,7 +255,7 @@ export class LookComponent extends BaseComponent implements OnInit {
   }
   ngOnInit() {
     this.changeScreen("zfm/look");
-    this.zfm.getAllFams().subscribe(res=>{
+    this.zfm.$allFams.subscribe(res=>{
       this.toShow=this.getAsyncData(res).pipe(share());
     });
   }
@@ -344,10 +344,14 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   addNewFam(){
     let fam=new Fam();
-    this.zfm.$fams.push(fam);
+    this.zfm.$allFams.subscribe((fams)=>{
+      fams.push(fam);
+    })
+    // this.zfm.$fams.push(fam);
     this.zfm.$selectedFam=fam;
-    fam.$event="sab";this.refreshShow();
-    console.log(this.zfm.$fams.length)
+    fam.$event="sab";
+    this.refreshShow();
+    // console.log(this.zfm.$fams.length)
     // this.changeScreen('zfm/look/detail');
   }
 }

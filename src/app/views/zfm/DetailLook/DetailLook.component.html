@@ -43,11 +43,11 @@
                (ngModelChange)="this.zfm.$selectedFam.$dateString=$event" >-->
                <input placeholder="Datepicker" [bsConfig]="dpConfig" [ngModel]="this.zfm.$selectedFam.$date" (ngModelChange)="this.$date=$event" [ngModelOptions]="{standalone: true}" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
             </div>
-            <!-- <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3">
               <label for="">Place</label>
               <input class="form-control" type="" name="" disabled [(ngModel)]="this.zfm.$selectedFam.$place.$place">
               
-            </div> -->
+            </div>
             <div class="form-group col-sm-3">
               <label for="">Duration</label>
               <!--<input class="form-control" type="" name="" [(ngModel)]="this.zfm.$selectedFam.$timeLong" >-->

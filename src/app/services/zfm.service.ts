@@ -13,7 +13,7 @@ import {
   Headers
 } from '@angular/http';
 import {
-  Observable,BehaviorSubject
+  Observable,BehaviorSubject,Subject
 } from 'rxjs';
 import {List} from 'immutable';
 import {
@@ -27,25 +27,39 @@ export class ZfmService {
 
   private famNumberChange$:Observable<Number>;
 
-  private _listFams:BehaviorSubject<List<Fam>>=new BehaviorSubject<List<Fam>>(List([]));
-  public readonly listFams: Observable<List<Fam>> = this._listFams.asObservable();
   private fams: Array < Fam > ;
   private places: Array < Place > ;
   private saveFams: Array < Fam > ;
   private savePlaces: Array < Place > ;
   private selectedFam: Fam;
   private baseUrl: string = 'http://localhost:5000';
-
+  private allFams: Observable < Fam[] > ;
   private baseFam = this.restangular.all('fam');
-
+  private subFams:Subject<Fam[]>;
 
   constructor(private _http:Http,private restangular: Restangular) {
     this.fams = new Array < Fam > ();
     this.places = new Array < Place > ();
     this.getAll();
-
+    this.refreshFams();
   }
 
+	public get $subFams(): Subject<Fam[]> {
+		return this.subFams;
+	}
+
+	public set $subFams(value: Subject<Fam[]>) {
+		this.subFams = value;
+	}
+
+
+	public get $allFams(): Observable < Fam[] >  {
+		return this.allFams;
+	}
+
+	public set $allFams(value: Observable < Fam[] > ) {
+		this.allFams = value;
+	}
 
 
 	public get $famNumberChange$(): Observable<Number> {
@@ -114,6 +128,14 @@ export class ZfmService {
       }
       return result;
     });
+  }
+
+  refreshFams(){
+    // this.allFams=this.getAllFams();
+    // this.allFams.combineLatest(this.getAllFams());
+    this.subFams.combineLatest(this.getAllFams());
+    // this.subFams=this.getAllFams();
+    // this.subFams.
   }
 
   postFam(model:any){
