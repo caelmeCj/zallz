@@ -105,8 +105,11 @@
                   <i class="icon-settings"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right " *dropdownMenu>
-                  <a class="dropdown-item" (click)="this.selectFam(fam)">Look</a>
-                  <a class="dropdown-item" href="#">Remove</a>
+                  <a class="dropdown-item" (click)="this.selectFam(fam);this.changeScreen('zfm/look/detail');">Look</a>
+                  <a class="dropdown-item" >
+                      <delete-confirm (onConfirm)="sendDelete($event)"
+                      (onCancel)="sendCancel($event)"></delete-confirm>
+                  </a>
                   <a class="dropdown-item" href="#">Quick modif</a>
                 </div>
               </div>

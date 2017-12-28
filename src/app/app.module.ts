@@ -5,11 +5,11 @@ import { HttpModule }    from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
-
 import {BaseService} from './services/base.service';
 import {A2Edatetimepicker} from 'ng2-eonasdan-datetimepicker';
 import {WebApiObservableService} from './services/web-api-observable.service';
 import {PlacePipePipe} from './pipes/PlacePipe.pipe';
+import { NgxDeleteConfirmModule } from 'ngx-delete-confirm';
 // Import containers
 import {
   FullLayoutComponent,
@@ -89,6 +89,7 @@ export function RestangularConfigFactory (RestangularProvider) {
     ChartsModule,
     A2Edatetimepicker,
     RestangularModule.forRoot(RestangularConfigFactory),
+    NgxDeleteConfirmModule.forRoot()
 
   ],
   declarations: [

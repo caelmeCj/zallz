@@ -5,6 +5,16 @@ export class BaseService {
 private isCollapsed:boolean;
 private screen:string;
 private actionUser:string;
+private displayWord:any={
+	deleteAlert:{
+		title:{
+			en:"Are you sur?"
+		},
+		detail:{
+			en:"Are you really sur you want to do this?"
+		}
+	}
+};
 constructor() {
 	// this.screen="look";
 	
