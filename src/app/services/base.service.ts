@@ -20,6 +20,16 @@ constructor() {
 	
  }
 
+
+	public get $displayWord(): any {
+		return this.displayWord;
+	}
+
+	public set $displayWord(value: any) {
+		this.displayWord = value;
+	}
+ 
+
 	public get $isCollapsed(): boolean {
 		return this.isCollapsed;
 	}

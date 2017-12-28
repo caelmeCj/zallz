@@ -184,7 +184,12 @@ export class ZfmService {
           (val) => {
             console.log("POST call successful value returned in body",
               val);
-              if(val.status==200) this.selectedFam.$status="saved";
+              if(val.json()[0].result=="success") {
+                // console.log(val.json()[0].)
+                this.selectedFam.$num=val.json()[0].lastId;
+                console.log(this.selectedFam.$num);
+                this.selectedFam.$status="saved";
+              }
           },
           response => {
             console.log("POST call in error", response);
@@ -229,6 +234,11 @@ export class ZfmService {
         (val) => {
             console.log("DELETE call successful value returned in body", 
                         val);
+          if(val.json()[0].result=="success"){
+            let arr =  this.$behavFams.getValue();
+            arr.splice(this.indexArrayFam(this.selectedFam.$num),1);
+            this.$behavFams.next(arr);
+          }
         },
         response => {
             console.log("DELETE call in error", response);
@@ -237,7 +247,15 @@ export class ZfmService {
             console.log("The DELETE observable is now completed.");
         });
 }
-  
+
+indexArrayFam(num:number){
+  for(let f of this.$behavFams.getValue()){
+    if(f.$num==num){
+      console.log( this.$behavFams.getValue().indexOf(f))
+      return this.$behavFams.getValue().indexOf(f);
+    }
+  }
+}  
 
 
 

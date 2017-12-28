@@ -13,6 +13,8 @@ import {FroalaEditorModule,FroalaViewModule} from 'angular-froala-wysiwyg';
 import { DetailLookComponent } from './DetailLook/DetailLook.component';
 import { MyDatePickerModule} from 'mydatepicker';
 // import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+// import { DeleteConfirmModule } from '../../components/mine/delete-confirm';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { BsDatepickerModule,TimepickerModule } from 'ngx-bootstrap';
 import { LOCALE_ID } from '@angular/core';
 import 'moment/locale/fr';
@@ -34,7 +36,10 @@ import {PlacePipePipe} from '../../pipes/PlacePipe.pipe';
     FroalaViewModule.forRoot(),
     AgmCoreModule.forRoot({
         apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-      })
+      }),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    })
   ],
   providers:[ZfmService,{ provide: LOCALE_ID, useValue: "en-US" }],
   declarations: [ZfmComponent,PlacePipePipe,
