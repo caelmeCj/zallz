@@ -42,6 +42,7 @@ import {
 import {Subject} from 'rxjs/Rx';
 
 import {PlacePipePipe} from '../../../pipes/PlacePipe.pipe';
+
 // import {FilterByPipe} from 'ngx-pipes';
 @Component({
   selector: 'app-Look',
@@ -52,7 +53,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
 
   @Output() onCollapsed = new EventEmitter < boolean > ();
-
+  
 
   try: string = 'try';
   collapsed = false;
@@ -209,7 +210,7 @@ export class LookComponent extends BaseComponent implements OnInit {
 
   selectFam(fam: Fam) {
     this.zfm.$selectedFam = fam;
-    this.changeScreen('zfm/look/detail');
+    
   }
 
   addNewFam(){

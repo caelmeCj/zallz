@@ -10,7 +10,7 @@
             </div>
             
             <div class="col-sm-2">              
-              <button class="btn btn-success float-right" (click)="this.changeScreen('zfm/look')" >
+              <button class="btn btn-success float-right" (click)="this.zfm.insertFam(); this.changeScreen('zfm/look')" >
                 <i class="fa fa-check fa-lg mt-4"></i>
               </button>
               <button class="btn float-right">
@@ -29,10 +29,10 @@
                 name="select-searchfield" class="form-control">
                   <option value="" selected>Event</option>
                   <option value="sab">Sabath</option>
-                  <option value="new_moon">New Moon</option>
-                  <option value="passover">Passover</option>
+                  <option value="moon">New Moon</option>
+                  <option value="paska">Passover</option>
                   <option value="feast">Feast</option>
-                  <option value="pentekost">Pentekost</option>
+                  <option value="pentek">Pentekost</option>
                   <option value="other">Other</option>
                 </select>  
             </div>

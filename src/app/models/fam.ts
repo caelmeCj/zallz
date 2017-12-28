@@ -24,7 +24,10 @@ export class Fam extends Base{
 
 
 	
-    
+    verrifChangeableStatus(){
+		if(this.$status=="saved")
+			this.$status="changed";
+	}
 
 	public get $placeClass(): Place {
 		return this.placeClass;
@@ -32,6 +35,7 @@ export class Fam extends Base{
 
 	public set $placeClass(value: Place) {
 		this.placeClass = value;
+		this.verrifChangeableStatus();		
 	}
 
 	public get $place(): number {
@@ -39,7 +43,7 @@ export class Fam extends Base{
 	}
 
 	public set $place(value: number) {
-		this.place = value;
+		this.place = value;this.verrifChangeableStatus();
 	}
 	
 
@@ -48,7 +52,7 @@ export class Fam extends Base{
 	}
 
 	public set $num(value: number) {
-		this.num = value;
+		this.num = value;this.verrifChangeableStatus();
 	}
 
 	public get $fam(): String {
@@ -56,7 +60,7 @@ export class Fam extends Base{
 	}
 
 	public set $fam(value: String) {
-		this.fam = value;
+		this.fam = value;this.verrifChangeableStatus();
 	}
 
 	public get $summary(): String {
@@ -64,7 +68,7 @@ export class Fam extends Base{
 	}
 
 	public set $summary(value: String) {
-		this.summary = value;
+		this.summary = value;this.verrifChangeableStatus();
 	}
 
 	public get $event(): String {
@@ -72,7 +76,7 @@ export class Fam extends Base{
 	}
 
 	public set $event(value: String) {
-		this.event = value;
+		this.event = value;this.verrifChangeableStatus();
 	}
 
 	public get $date(): Date {
@@ -80,7 +84,7 @@ export class Fam extends Base{
 	}
 
 	public set $date(value: Date) {
-		this.date = value;
+		this.date = value;this.verrifChangeableStatus();
 	}
 
 
@@ -89,7 +93,7 @@ export class Fam extends Base{
 	}
 
 	public set $dateString(value: String) {
-		this.dateString = value;
+		this.dateString = value;this.verrifChangeableStatus();
 	}	
 
 
@@ -98,7 +102,7 @@ export class Fam extends Base{
 	}
 
 	public set $timeLong(value: Date) {
-		this.timeLong = value;
+		this.timeLong = value;this.verrifChangeableStatus();
 	}
 	
 
@@ -108,10 +112,9 @@ export class Fam extends Base{
 	}
 
 	public set $dateObj(value: any ) {
-
-		this.dateObj = value;
-		
+		this.dateObj = value;		
 		this.date=moment(""+this.dateObj.date.day+"/"+this.dateObj.date.month+"/"+this.dateObj.date.year,"DD/MM/YYYY").toDate();
+		this.verrifChangeableStatus();
 	}
 	
   
