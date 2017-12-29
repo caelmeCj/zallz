@@ -65,12 +65,11 @@ export class ZfmService {
 
 
 
-
-    // this.getAllFams();
-    // this.refreshFams();
-
   }
 
+  public verrifConnex(){
+
+  }
 
 
   public fillTempData() {
