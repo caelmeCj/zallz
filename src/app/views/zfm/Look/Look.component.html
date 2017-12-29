@@ -20,10 +20,10 @@
                 <select id="select-searchfield" [ngModel]="this.event" (ngModelChange)="this.$events=$event" name="select-searchfield" class="form-control">
                   <option value="" selected>Event</option>
                   <option value="sab">Sabath</option>
-                  <option value="new_moon">New Moon</option>
-                  <option value="passover">Passover</option>
+                  <option value="moon">New Moon</option>
+                  <option value="pask">Passover</option>
                   <option value="feast">Feast</option>
-                  <option value="pentekost">Pentekost</option>
+                  <option value="pentek">Pentekost</option>
                   <option value="other">Other</option>
                 </select>
               </div>
@@ -55,7 +55,7 @@
                   [ngModel]="this.date_range" (ngModelChange)="this.$date_range=$event">
                 <span class="input-group-addon {{this.date_range_month?'bg-primary':''}}" (click)="this.toggleDateRangeMonth()">month</span>
                 <span class="input-group-addon {{this.date_range_year?'bg-primary':''}}" (click)="this.toggleDateRangeYear()">year</span>
-                <span class="input-group-addon" (click)="drp.toggle()"><i class="fa fa-calendar"></i>&nbsp;<i class="fa fa-calendar"></i></span>
+                <span class="input-group-addon" (click)="drp.toggle()"><i class="fa fa-calendar-check-o"></i></span>
               </div>
             </div>
 
