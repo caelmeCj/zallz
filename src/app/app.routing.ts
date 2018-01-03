@@ -27,6 +27,10 @@ export const routes: Routes = [
       {
         path: 'zfm',
         loadChildren: './views/zfm/zfm.module#ZfmModule'
+      },
+      {
+        path: 'wellbing',
+        loadChildren: './views/wellbing/wellbing.module#WellbingModule'
       }
     ]
   }

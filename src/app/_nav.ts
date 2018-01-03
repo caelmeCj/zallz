@@ -1,7 +1,7 @@
 export const navigation = [
   {
     name: 'Home',
-    url: '/home',
+    url: '/homes',
     icon: 'icon-speedometer',
     badge: {
       variant: 'info',
@@ -23,35 +23,12 @@ export const navigation = [
     children: [
       {
         name: 'Look',
-        url: '/zfm/look',
+        url: '/zfm',
         icon: 'icon-puzzle',
         children:[
           {
             name:'Search',
-            url:'/zfm/look/search'
-          },
-          {
-            name:'Filter',
-            url:'/zfm/look/filter'
-          }
-        ]
-      },
-      {
-        name: 'Fill',
-        url: '/zfm/fill',
-        icon: 'icon-puzzle',
-        children:[
-          {
-            name:'info',
-            url:'/zfm/fill/info'
-          },
-          {
-            name:'summarize',
-            url:'/zfm/fill/summarize'
-          },
-          {
-            name:'comment',
-            url:'/zfm/fill/comment'
+            url:'/zfm'
           }
         ]
       }      

@@ -4,10 +4,10 @@ import { WellbingComponent } from './wellbing.component';
 import { BaseComponent } from './Base/Base.component';
 import { LookComponent } from './Look/Look.component';
 import { DetailLookComponent } from './DetailLook/DetailLook.component';
-
+import { WellbingRouting } from './wellbing.routing';
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,WellbingRouting
   ],
   declarations: [WellbingComponent,
     BaseComponent,
